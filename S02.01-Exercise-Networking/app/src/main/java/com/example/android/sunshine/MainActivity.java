@@ -74,12 +74,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String[] weatherResult) {
-            super.onPostExecute(weatherResult);
-
-
-            if (weatherResult != null && weatherResult.length != 0) {
+            if (weatherResult != null) {
                 for (String result : weatherResult) {
-                    mWeatherTextView.setText(result + "\n\n\n");
+                    mWeatherTextView.append(result + "\n\n\n");
                 }
             }
         }
