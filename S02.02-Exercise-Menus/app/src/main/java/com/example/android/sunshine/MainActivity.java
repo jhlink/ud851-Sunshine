@@ -56,10 +56,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_refresh) {
+            clearTextInWeatherTextView();
             loadWeatherData();
             return true;
         }
         return false;
+    }
+
+    private void clearTextInWeatherTextView() {
+        mWeatherTextView.setText("");
     }
 
     /**
