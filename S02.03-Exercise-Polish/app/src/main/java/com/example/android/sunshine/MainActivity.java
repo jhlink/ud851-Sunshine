@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mWeatherTextView;
 
-    // TODO (6) Add a TextView variable for the error message display
+    private TextView mErrorMessageTextView;
 
     // TODO (16) Add a ProgressBar variable to show and hide the progress bar
 
@@ -47,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
          * do things like set the text of the TextView.
          */
         mWeatherTextView = (TextView) findViewById(R.id.tv_weather_data);
-
-        // TODO (7) Find the TextView for the error message using findViewById
+        mErrorMessageTextView = (TextView) findViewById(R.id.tv_error_msg);
 
         // TODO (17) Find the ProgressBar using findViewById
 
