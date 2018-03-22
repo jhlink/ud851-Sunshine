@@ -45,9 +45,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadWeatherData() {
-        String userPrefLoc = SunshinePreferences.getPreferredWeatherLocation(MainActivity.this);
-        URL requestURL = NetworkUtils.buildUrl(userPrefLoc) ;
-        new FetchWeatherTask().execute(requestURL);
+        String userPrefLoc = SunshinePreferences.getPreferredWeatherLocation(this);
+        new FetchWeatherTask().execute(userPrefLoc);
     }
 
     public class FetchWeatherTask extends AsyncTask<URL, Void, String> {
