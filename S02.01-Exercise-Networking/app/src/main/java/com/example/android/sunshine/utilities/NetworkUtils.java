@@ -76,7 +76,7 @@ public final class NetworkUtils {
         URL resultURL = null;
 
         try {
-            resultURL = new URL(queryResultURI);
+            resultURL = new URL(queryResultURI.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
