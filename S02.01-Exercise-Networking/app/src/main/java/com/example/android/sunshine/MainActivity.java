@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     // TODO (8) Create a method that will get the user's preferred location and execute your new AsyncTask and call it loadWeatherData
 
-    public class WeatherQueryAsyncRequest extends AsyncTask<URL, Void, String> {
+    public class FetchWeatherTask extends AsyncTask<URL, Void, String> {
         @Override
         protected String doInBackground(URL... urls) {
             URL requestURL = URL[0];
