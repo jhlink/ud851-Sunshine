@@ -58,7 +58,15 @@ public class MainActivity extends AppCompatActivity {
             }
             return requestData;
         }
+
+        @Override
+        protected void onPostExecute(String weatherResult) {
+            super.onPostExecute(weatherResult);
+
+            if (weatherResult != null && !weatherResult.isEmpty()) {
+                mWeatherTextView.setText(weatherResult);
+            }
+        }
     }
 
-    // TODO (7) Override the onPostExecute method to display the results of the network request
 }
