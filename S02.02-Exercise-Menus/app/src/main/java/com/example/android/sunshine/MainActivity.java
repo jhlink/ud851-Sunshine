@@ -18,6 +18,7 @@ package com.example.android.sunshine;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.widget.TextView;
 
 import com.example.android.sunshine.data.SunshinePreferences;
@@ -43,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
 
         /* Once all of our views are setup, we can load the weather data. */
         loadWeatherData();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.forecast, menu);
+        return true;
     }
 
     /**
@@ -96,9 +103,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-    // TODO (5) Override onCreateOptionsMenu to inflate the menu for this Activity
-    // TODO (6) Return true to display the menu
 
     // TODO (7) Override onOptionsItemSelected to handle clicks on the refresh button
 }
