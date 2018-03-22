@@ -34,10 +34,6 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     // Within forecast_list_item.xml //////////////////////////////////////////////////////////////
-    // TODO (5) Add a layout for an item in the list called forecast_list_item.xml
-    // TODO (6) Make the root of the layout a vertical LinearLayout
-    // TODO (7) Set the width of the LinearLayout to match_parent and the height to wrap_content
-
     // TODO (8) Add a TextView with an id @+id/tv_weather_data
     // TODO (9) Set the text size to 22sp
     // TODO (10) Make the width and height wrap_content
