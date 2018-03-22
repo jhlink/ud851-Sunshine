@@ -41,10 +41,9 @@ public class MainActivity extends AppCompatActivity {
          */
         mWeatherTextView = (TextView) findViewById(R.id.tv_weather_data);
 
-        // TODO (9) Call loadWeatherData to perform the network request to get the weather
+        loadWeatherData();
     }
 
-    // TODO (8) Create a method that will get the user's preferred location and execute your new AsyncTask and call it loadWeatherData
     private void loadWeatherData() {
         String userPrefLoc = SunshinePreferences.getPreferredWeatherLocation(MainActivity.this);
         URL requestURL = NetworkUtils.buildUrl(userPrefLoc) ;
