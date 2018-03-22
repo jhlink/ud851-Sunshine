@@ -22,8 +22,8 @@ import android.widget.TextView;
 
 import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.utilities.NetworkUtils;
+import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
-import java.io.IOException;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,26 +49,35 @@ public class MainActivity extends AppCompatActivity {
         new FetchWeatherTask().execute(userPrefLoc);
     }
 
-    public class FetchWeatherTask extends AsyncTask<URL, Void, String> {
+    public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
         @Override
-        protected String doInBackground(URL... urls) {
-            URL requestURL = URL[0];
-            String requestData = "";
+        protected String[] doInBackground(String... strings) {
+
+            if (strings.length == 0) {
+                return null;
+            }
+
+            String firstLocation = strings[0];
+            String[] requestData = null;
+
+            URL requestURL =  NetworkUtils.buildUrl(firstLocation);
 
             try {
-                requestData = NetworkUtils.getResponseFromHttpUrl(requestURL).toString();
-            } catch (IOException e) {
+                String stringResult = NetworkUtils.getResponseFromHttpUrl(requestURL);
+                requestData = OpenWeatherJsonUtils.getSimpleWeatherStringsFromJson(MainActivity.this, stringResult);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
+
             return requestData;
         }
 
         @Override
-        protected void onPostExecute(String weatherResult) {
+        protected void onPostExecute(String[] weatherResult) {
             super.onPostExecute(weatherResult);
 
             if (weatherResult != null && !weatherResult.isEmpty()) {
-                mWeatherTextView.setText(weatherResult);
+                mWeatherTextView.setText(weatherResult.length);
             }
         }
     }
