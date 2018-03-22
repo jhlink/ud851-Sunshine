@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.android.sunshine.data.SunshinePreferences;
@@ -65,9 +66,15 @@ public class MainActivity extends AppCompatActivity {
         new FetchWeatherTask().execute(location);
     }
 
-    // TODO (8) Create a method called showWeatherDataView that will hide the error message and show the weather data
+    private void showWeatherDataView() {
+        mErrorMessageTextView.setVisibility(View.INVISIBLE);
+        mWeatherTextView.setVisibility(View.VISIBLE);
+    }
 
-    // TODO (9) Create a method called showErrorMessage that will hide the weather data and show the error message
+    private void showErrorMessage() {
+        mErrorMessageTextView.setVisibility(View.VISIBLE);
+        mWeatherTextView.setVisibility(View.INVISIBLE);
+    }
 
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
