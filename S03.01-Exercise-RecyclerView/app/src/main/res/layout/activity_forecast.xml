@@ -20,9 +20,8 @@
     <android.support.v7.app.AlertController.RecycleListView
         android:id="@+id/recyclerview_forecast"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"/>
 
-    </android.support.v7.app.AlertController.RecycleListView>
 
     <TextView
         android:id="@+id/tv_error_message_display"
