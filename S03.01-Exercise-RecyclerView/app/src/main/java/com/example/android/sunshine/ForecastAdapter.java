@@ -39,7 +39,7 @@ public class ForecastAdapter extends  RecyclerView.Adapter<ForecastAdapter
 
     @Override
     public void onBindViewHolder(ForecastAdapterViewHolder holder, int position) {
-        Log.v(TAG, "Forecast #" + position);
+        Log.v(TAG, "Forecast weather:" + mWeatherData[position]);
         holder.bind(mWeatherData[position]);
     }
 
