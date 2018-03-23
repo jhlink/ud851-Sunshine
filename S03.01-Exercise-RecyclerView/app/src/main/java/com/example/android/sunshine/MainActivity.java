@@ -58,10 +58,9 @@ public class MainActivity extends AppCompatActivity {
         /* This TextView is used to display errors and will be hidden if there are no errors */
         mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message_display);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager
+                .VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layoutManager.setReverseLayout(false);
 
         mRecyclerView.setHasFixedSize(true);
         mForecastAdapter = new ForecastAdapter();
