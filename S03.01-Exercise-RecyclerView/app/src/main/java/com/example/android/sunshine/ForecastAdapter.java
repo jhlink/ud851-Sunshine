@@ -36,7 +36,7 @@ public class ForecastAdapter extends  RecyclerView.Adapter<ForecastAdapter
     @Override
     public void onBindViewHolder(ForecastAdapterViewHolder holder, int position) {
         Log.v(TAG, "Forecast #" + position);
-        holder.bind(position);
+        holder.bind(mWeatherData[position]);
     }
 
     public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder {
@@ -47,6 +47,10 @@ public class ForecastAdapter extends  RecyclerView.Adapter<ForecastAdapter
             super(inputView);
             mWeatherTextView = (TextView) inputView.findViewById(R.layout
                     .forecast_list_item);
+        }
+
+        public void bind(String viewWeather) {
+            mWeatherTextView.setText(viewWeather);
         }
     }
 }
