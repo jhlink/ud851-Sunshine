@@ -65,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
         mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message_display);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(layoutManager);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.setReverseLayout(false);
 
-        layoutManager.addView(mRecyclerView);
         mRecyclerView.setHasFixedSize(true);
         mForecastAdapter = new ForecastAdapter();
         mRecyclerView.setAdapter(mForecastAdapter);
