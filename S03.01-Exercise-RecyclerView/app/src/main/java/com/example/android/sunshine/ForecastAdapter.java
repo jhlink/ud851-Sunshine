@@ -52,7 +52,7 @@ public class ForecastAdapter extends  RecyclerView.Adapter<ForecastAdapter
     }
 
     void setWeatherData(String[] weatherData) {
-        mWeatherData = weatherData.clone();
+        mWeatherData = weatherData;
         notifyDataSetChanged();
     }
 
