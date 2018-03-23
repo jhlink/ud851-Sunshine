@@ -1,7 +1,10 @@
 package com.example.android.sunshine;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
@@ -11,8 +14,21 @@ import android.widget.TextView;
 
 public class ForecastAdapter extends  RecyclerView.Adapter<ForecastAdapter
         .ForecastAdapterViewHolder> {
-
     private String[] mWeatherData;
+
+    @Override
+    public ForecastAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+
+        int forecastListItemXML = R.layout.forecast_list_item;
+        boolean shouldAttachedImmediatelyToParent = true;
+
+        View view = inflater.inflate(forecastListItemXML, parent, shouldAttachedImmediatelyToParent);
+        ForecastAdapterViewHolder viewHolder = new ForecastAdapterViewHolder(view);
+
+        return viewHolder;
+    }
 
     public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder {
 
