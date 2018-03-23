@@ -17,7 +17,7 @@ public class ForecastAdapter extends  RecyclerView.Adapter<ForecastAdapter
         .ForecastAdapterViewHolder> {
 
     private static final String TAG = ForecastAdapter.class.getSimpleName();
-    private String[] mWeatherData;
+    private String[] mWeatherData = null;
 
     @Override
     public ForecastAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -46,6 +46,12 @@ public class ForecastAdapter extends  RecyclerView.Adapter<ForecastAdapter
         }
         return 0;
     }
+
+    void setWeatherData(String[] weatherData) {
+        mWeatherData = weatherData.clone();
+        notifyDataSetChanged();
+    }
+
 
     public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder {
 
