@@ -63,8 +63,7 @@ public class ForecastAdapter extends  RecyclerView.Adapter<ForecastAdapter
 
         public ForecastAdapterViewHolder(View inputView) {
             super(inputView);
-            mWeatherTextView = (TextView) inputView.findViewById(R.layout
-                    .forecast_list_item);
+            mWeatherTextView = (TextView) inputView.findViewById(R.id.tv_weather_data);
         }
 
         public void bind(String viewWeather) {
