@@ -29,7 +29,7 @@ public class ForecastAdapter extends  RecyclerView.Adapter<ForecastAdapter
         LayoutInflater inflater = LayoutInflater.from(context);
 
         int forecastListItemXML = R.layout.forecast_list_item;
-        boolean shouldAttachedImmediatelyToParent = true;
+        boolean shouldAttachedImmediatelyToParent = false;
 
         View view = inflater.inflate(forecastListItemXML, parent, shouldAttachedImmediatelyToParent);
         ForecastAdapterViewHolder viewHolder = new ForecastAdapterViewHolder(view);
