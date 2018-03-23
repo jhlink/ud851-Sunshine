@@ -18,6 +18,7 @@ package com.example.android.sunshine;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,11 +35,12 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     // TODO (33) Delete mWeatherTextView
-    private TextView mWeatherTextView;
 
     // TODO (34) Add a private RecyclerView variable called mRecyclerView
     // TODO (35) Add a private ForecastAdapter variable called mForecastAdapter
 
+    private RecyclerView mRecyclerView;
+    private ForecastAdapter mForecastAdapter;
     private TextView mErrorMessageDisplay;
 
     private ProgressBar mLoadingIndicator;
@@ -53,9 +55,10 @@ public class MainActivity extends AppCompatActivity {
          * Using findViewById, we get a reference to our TextView from xml. This allows us to
          * do things like set the text of the TextView.
          */
-        mWeatherTextView = (TextView) findViewById(R.id.tv_weather_data);
 
         // TODO (37) Use findViewById to get a reference to the RecyclerView
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_forecast) ;
 
         /* This TextView is used to display errors and will be hidden if there are no errors */
         mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message_display);
