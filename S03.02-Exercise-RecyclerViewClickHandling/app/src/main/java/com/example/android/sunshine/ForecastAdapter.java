@@ -44,20 +44,30 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
         mClickHandler = inputFAClickHandler;
     }
 
-    // TODO (5) Implement OnClickListener in the ForecastAdapterViewHolder class
+    // COMP (5) Implement OnClickListener in the ForecastAdapterViewHolder class
     /**
      * Cache of the children views for a forecast list item.
      */
-    public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder {
+    public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final TextView mWeatherTextView;
 
         public ForecastAdapterViewHolder(View view) {
             super(view);
             mWeatherTextView = (TextView) view.findViewById(R.id.tv_weather_data);
-            // TODO (7) Call setOnClickListener on the view passed into the constructor (use 'this' as the OnClickListener)
+
+            // COMP (7) Call setOnClickListener on the view passed into the constructor (use
+            // 'this' as the OnClickListener)
+            view.setOnClickListener(this);
         }
 
-        // TODO (6) Override onClick, passing the clicked day's data to mClickHandler via its onClick method
+        // COMP (6) Override onClick, passing the clicked day's data to mClickHandler via its
+        // onClick method
+
+        @Override
+        public void onClick(View v) {
+            String clickedContentDescription = v.getContentDescription().toString();
+            mClickHandler.onForecastAdapterHandlerClick(clickedContentDescription);
+        }
     }
 
     /**
