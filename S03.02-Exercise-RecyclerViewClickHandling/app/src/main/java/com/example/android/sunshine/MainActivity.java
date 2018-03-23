@@ -31,12 +31,12 @@ import android.widget.Toast;
 import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.utilities.NetworkUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
+import com.example.android.sunshine.ForecastAdapter.ForecastAdapterOnClickHandler;
 
 import java.net.URL;
 
 // COMP (8) Implement ForecastAdapterOnClickHandler from the MainActivity
-public class MainActivity extends AppCompatActivity implements ForecastAdapter
-        .ForecastAdapterOnClickHandler {
+public class MainActivity extends AppCompatActivity implements ForecastAdapterOnClickHandler {
 
     private RecyclerView mRecyclerView;
     private ForecastAdapter mForecastAdapter;
@@ -150,6 +150,29 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
+        MenuInflater inflater = getMenuInflater();
+        /* Use the inflater's inflate method to inflate our menu layout to this menu */
+        inflater.inflate(R.menu.forecast, menu);
+        /* Return true so that the menu is displayed in the Toolbar */
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_refresh) {
+            mForecastAdapter.setWeatherData(null);
+            loadWeatherData();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
         @Override
@@ -194,28 +217,5 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter
                 showErrorMessage();
             }
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
-        MenuInflater inflater = getMenuInflater();
-        /* Use the inflater's inflate method to inflate our menu layout to this menu */
-        inflater.inflate(R.menu.forecast, menu);
-        /* Return true so that the menu is displayed in the Toolbar */
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_refresh) {
-            mForecastAdapter.setWeatherData(null);
-            loadWeatherData();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
