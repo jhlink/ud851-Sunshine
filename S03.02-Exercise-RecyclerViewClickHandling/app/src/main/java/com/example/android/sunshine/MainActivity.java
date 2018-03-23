@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter
     private TextView mErrorMessageDisplay;
 
     private ProgressBar mLoadingIndicator;
+    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +114,12 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter
     // COMP (10) Show a Toast when an item is clicked, displaying that item's weather data
     @Override
     public void onForecastAdapterHandlerClick(String someStuff) {
-        Toast.makeText(this, someStuff, Toast.LENGTH_SHORT).show();
+        if (mToast != null) {
+            mToast.cancel();
+        }
+
+        mToast = Toast.makeText(this, someStuff, Toast.LENGTH_SHORT);
+        mToast.show();
     }
 
     /**
