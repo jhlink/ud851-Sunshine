@@ -5,11 +5,17 @@ import android.view.View;
 import android.widget.TextView;
 
 /**
+ *
  * Created by james on 3/22/18.
  */
 
-public class ForecastAdapter {
+public class ForecastAdapter extends  RecyclerView.Adapter<ForecastAdapter
+        .ForecastAdapterViewHolder> {
+
+    private String[] mWeatherData;
+
     public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder {
+
         public final TextView mWeatherTextView;
 
         public ForecastAdapterViewHolder(View inputView) {
