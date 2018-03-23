@@ -35,10 +35,6 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    // TODO (33) Delete mWeatherTextView
-
-    // TODO (34) Add a private RecyclerView variable called mRecyclerView
-    // TODO (35) Add a private ForecastAdapter variable called mForecastAdapter
 
     private RecyclerView mRecyclerView;
     private ForecastAdapter mForecastAdapter;
@@ -51,13 +47,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
 
-        // TODO (36) Delete the line where you get a reference to mWeatherTextView
         /*
          * Using findViewById, we get a reference to our TextView from xml. This allows us to
          * do things like set the text of the TextView.
          */
 
-        // TODO (37) Use findViewById to get a reference to the RecyclerView
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_forecast) ;
 
@@ -72,16 +66,6 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mForecastAdapter = new ForecastAdapter();
         mRecyclerView.setAdapter(mForecastAdapter);
-
-        // TODO (38) Create layoutManager, a LinearLayoutManager with VERTICAL orientation and shouldReverseLayout == false
-
-        // TODO (39) Set the layoutManager on mRecyclerView
-
-        // TODO (40) Use setHasFixedSize(true) on mRecyclerView to designate that all items in the list will have the same size
-
-        // TODO (41) set mForecastAdapter equal to a new ForecastAdapter
-
-        // TODO (42) Use mRecyclerView.setAdapter and pass in mForecastAdapter
 
         /*
          * The ProgressBar that will indicate to the user that we are loading data. It will be
