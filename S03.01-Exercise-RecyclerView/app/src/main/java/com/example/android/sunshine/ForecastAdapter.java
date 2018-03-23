@@ -2,6 +2,7 @@ package com.example.android.sunshine;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 public class ForecastAdapter extends  RecyclerView.Adapter<ForecastAdapter
         .ForecastAdapterViewHolder> {
+
+    private static final String TAG = ForecastAdapter.class.getSimpleName();
     private String[] mWeatherData;
 
     @Override
@@ -28,6 +31,12 @@ public class ForecastAdapter extends  RecyclerView.Adapter<ForecastAdapter
         ForecastAdapterViewHolder viewHolder = new ForecastAdapterViewHolder(view);
 
         return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(ForecastAdapterViewHolder holder, int position) {
+        Log.v(TAG, "Forecast #" + position);
+        holder.bind(position);
     }
 
     public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder {
