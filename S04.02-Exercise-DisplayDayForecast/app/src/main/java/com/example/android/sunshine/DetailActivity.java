@@ -1,8 +1,11 @@
 package com.example.android.sunshine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import static android.app.Notification.EXTRA_TEXT;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -15,7 +18,11 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         todaysWeatherTextView = (TextView) findViewById(R.id.tv_detail_view_todays_weather);
-        String weatherData = getIntent().getStringExtra("TODAYS_WEATHER");
-        todaysWeatherTextView.setText(weatherData);
+        Intent receivedIntent = getIntent();
+
+        if (receivedIntent.hasExtra(Intent.EXTRA_TEXT)) {
+            String weatherData = receivedIntent.getStringExtra(Intent.EXTRA_TEXT);
+            todaysWeatherTextView.setText(weatherData);
+        }
     }
 }
