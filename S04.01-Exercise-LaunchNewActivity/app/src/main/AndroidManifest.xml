@@ -34,8 +34,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- TODO (4) Configure DetailActivity's up button functionality -->
-        <activity android:name=".DetailActivity"></activity>
+        <!-- COMP (4) Configure DetailActivity's up button functionality -->
+        <activity android:name=".DetailActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
-
 </manifest>
