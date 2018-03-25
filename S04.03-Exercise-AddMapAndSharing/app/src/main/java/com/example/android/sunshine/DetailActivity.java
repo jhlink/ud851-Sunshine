@@ -37,30 +37,19 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.share, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_share);
+        menuItem.setIntent(createShareWeatherForecastIntent());
 
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int itemID = item.getItemId();
+    private Intent createShareWeatherForecastIntent() {
+        Intent resultingIntent = ShareCompat.IntentBuilder.from(this)
+                .setType("text/plain")
+                .setText(mForecast + FORECAST_SHARE_HASHTAG)
+                .getIntent();
 
-        switch (itemID) {
-            case R.id.action_share:
-                shareWeatherForecast(mForecast);
-                break;
-
-            default:
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void shareWeatherForecast(String someWeather) {
-        ShareCompat.IntentBuilder.from(this)
-                .setText(someWeather)
-                .startChooser();
+        return resultingIntent;
     }
 
     // COMP (3) Create a menu with an item with id of action_share
