@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="action_share"
+        android:id="@+id/action_share"
         android:orderInCategory="1"
         android:title="@string/share_weather"
         app:showAsAction="ifRoom" />
