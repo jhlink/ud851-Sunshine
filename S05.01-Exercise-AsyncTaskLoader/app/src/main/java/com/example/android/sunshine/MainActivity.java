@@ -16,6 +16,7 @@
 package com.example.android.sunshine;
 
 import android.app.LoaderManager;
+import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
@@ -117,10 +118,29 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         new FetchWeatherTask().execute(location);
     }
 
-    // TODO (2) Within onCreateLoader, return a new AsyncTaskLoader that looks a lot like the existing FetchWeatherTask.
+    // COMP (2) Within onCreateLoader, return a new AsyncTaskLoader that looks a lot like the
+    // existing FetchWeatherTask.
+    @Override
+    public Loader<String> onCreateLoader(int id, final Bundle args) {
+        return new AsyncTaskLoader<String>() {
+            @Override
+            public String loadInBackground() {
+                return null;
+            }
+        };
+    }
+
     // TODO (3) Cache the weather data in a member variable and deliver it in onStartLoading.
+    @Override
+    public void onLoadFinished(Loader<String> loader, String data) {
+
+    }
 
     // TODO (4) When the load is finished, show either the data or an error message if there is no data
+    @Override
+    public void onLoaderReset(Loader<String> loader) {
+
+    }
 
     /**
      * This method is overridden by our MainActivity class in order to handle RecyclerView item
@@ -165,20 +185,6 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public Loader<String> onCreateLoader(int id, Bundle args) {
-        return null;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<String> loader, String data) {
-
-    }
-
-    @Override
-    public void onLoaderReset(Loader<String> loader) {
-
-    }
 
     // TODO (6) Remove any and all code from MainActivity that references FetchWeatherTask
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
