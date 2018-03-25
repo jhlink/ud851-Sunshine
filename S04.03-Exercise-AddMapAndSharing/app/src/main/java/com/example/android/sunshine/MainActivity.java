@@ -203,8 +203,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
-            Log.d(TAG, "Couldn't call " + geoLatlong.toString() + \
-                " thar be bugs to be torn asunder!!");
+            Log.d(TAG, "Couldn't call " + geoLatlong.toString() + " thar be bugs to be torn asunder!!");
         }
     }
 
