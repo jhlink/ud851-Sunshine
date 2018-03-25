@@ -2,6 +2,7 @@ package com.example.android.sunshine;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,8 +46,8 @@ public class DetailActivity extends AppCompatActivity {
         int itemID = item.getItemId();
 
         switch (itemID) {
-            case 1:
-                // TODO:  FUN FUN STUFF.
+            case R.id.action_share:
+                shareWeatherForecast(mForecast);
                 break;
 
             default:
@@ -56,6 +57,12 @@ public class DetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void shareWeatherForecast(String someWeather) {
+        ShareCompat.IntentBuilder.from(this)
+                .setText(someWeather)
+                .startChooser();
+    }
+
     // COMP (3) Create a menu with an item with id of action_share
-    // TODO (4) Display the menu and implement the forecast sharing functionality
+    // COMP (4) Display the menu and implement the forecast sharing functionality
 }
