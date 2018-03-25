@@ -26,8 +26,8 @@
     <!--COMP (1) Add a menu item to open the map-->
 
     <item
-        android:id="@+id/share_weather_details"
+        android:id="@+id/open_map"
         android:orderInCategory="2"
-        android:title="@string/share_weather"
+        android:title="@string/open_map"
         app:showAsAction="ifRoom" />
 </menu>
