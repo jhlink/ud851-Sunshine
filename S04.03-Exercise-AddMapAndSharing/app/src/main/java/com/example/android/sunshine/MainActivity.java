@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -155,6 +154,56 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
+        MenuInflater inflater = getMenuInflater();
+        /* Use the inflater's inflate method to inflate our menu layout to this menu */
+        inflater.inflate(R.menu.forecast, menu);
+        /* Return true so that the menu is displayed in the Toolbar */
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_refresh) {
+            mForecastAdapter.setWeatherData(null);
+            loadWeatherData();
+            return true;
+        } else if (id == R.id.open_map) {
+            // TODO (2) Launch the map when the map menu item is clicked
+
+            //  For now, we're just providing a static address until we're given more information
+            // about what we're actually locating in a map.
+            String somePlace = "Chicago, IL";
+            buildMapUri(somePlace);
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void buildMapUri(String address) {
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("geo")
+                .encodedOpaquePart("0,0?=q" + Uri.encode(address));
+
+        Uri geoMap = builder.build();
+
+        showMap(geoMap);
+    }
+
+    private void showMap(Uri geoLatlong) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(geoLatlong);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
         @Override
@@ -199,30 +248,5 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
                 showErrorMessage();
             }
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
-        MenuInflater inflater = getMenuInflater();
-        /* Use the inflater's inflate method to inflate our menu layout to this menu */
-        inflater.inflate(R.menu.forecast, menu);
-        /* Return true so that the menu is displayed in the Toolbar */
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_refresh) {
-            mForecastAdapter.setWeatherData(null);
-            loadWeatherData();
-            return true;
-        }
-
-        // TODO (2) Launch the map when the map menu item is clicked
-
-        return super.onOptionsItemSelected(item);
     }
 }
