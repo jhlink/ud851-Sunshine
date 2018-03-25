@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,13 +40,17 @@ import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.utilities.NetworkUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
+import org.w3c.dom.Text;
+
 import java.net.URL;
 
 // COMP (1) Implement the proper LoaderCallbacks interface and the methods of that interface
 public class MainActivity extends AppCompatActivity implements ForecastAdapterOnClickHandler,
-        LoaderManager.LoaderCallbacks<String> {
+        LoaderManager.LoaderCallbacks<String[]> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    private static final String WEATHER_LOC = "location";
 
     private RecyclerView mRecyclerView;
     private ForecastAdapter mForecastAdapter;
@@ -121,22 +126,60 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
     // COMP (2) Within onCreateLoader, return a new AsyncTaskLoader that looks a lot like the
     // existing FetchWeatherTask.
     @Override
-    public Loader<String> onCreateLoader(int id, final Bundle args) {
-        return new AsyncTaskLoader<String>() {
+    public Loader<String[]> onCreateLoader(int id, final Bundle args) {
+        return new AsyncTaskLoader<String[]>() {
+
+            private String cachedWeatherData;
+
             @Override
-            public String loadInBackground() {
-                return null;
+            public String[] loadInBackground() {
+                String weatherLoc = args.getString(WEATHER_LOC);
+
+                if (weatherLoc == null || TextUtils.isEmpty((weatherLoc))) {
+                    return null;
+                }
+
+                URL weatherRequestUrl = NetworkUtils.buildUrl(weatherLoc);
+                String[] simpleJsonWeatherData = {};
+
+                try {
+                    String jsonWeatherResponse = NetworkUtils
+                            .getResponseFromHttpUrl(weatherRequestUrl);
+
+                    simpleJsonWeatherData = OpenWeatherJsonUtils
+                            .getSimpleWeatherStringsFromJson(MainActivity.this, jsonWeatherResponse);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return null;
+                }
+
+                return simpleJsonWeatherData;
+            }
+
+            // TODO (3) Cache the weather data in a member variable and deliver it in onStartLoading.
+            @Override
+            protected void onStartLoading() {
+            /* If there's no zip code, there's nothing to look up. */
+                if (params.length == 0) {
+                    return null;
+                }
+
+                }
+                super.onStartLoading();
+
+                if (cachedWeatherData != null) {
+                    cachedWeatherData =
+                }
             }
         };
     }
 
-    // TODO (3) Cache the weather data in a member variable and deliver it in onStartLoading.
+    // TODO (4) When the load is finished, show either the data or an error message if there is no data
     @Override
     public void onLoadFinished(Loader<String> loader, String data) {
 
     }
 
-    // TODO (4) When the load is finished, show either the data or an error message if there is no data
     @Override
     public void onLoaderReset(Loader<String> loader) {
 
@@ -198,27 +241,6 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         @Override
         protected String[] doInBackground(String... params) {
 
-            /* If there's no zip code, there's nothing to look up. */
-            if (params.length == 0) {
-                return null;
-            }
-
-            String location = params[0];
-            URL weatherRequestUrl = NetworkUtils.buildUrl(location);
-
-            try {
-                String jsonWeatherResponse = NetworkUtils
-                        .getResponseFromHttpUrl(weatherRequestUrl);
-
-                String[] simpleJsonWeatherData = OpenWeatherJsonUtils
-                        .getSimpleWeatherStringsFromJson(MainActivity.this, jsonWeatherResponse);
-
-                return simpleJsonWeatherData;
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
         }
 
         @Override
