@@ -43,6 +43,7 @@ import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 import org.w3c.dom.Text;
 
 import java.net.URL;
+import java.util.Arrays;
 
 // COMP (1) Implement the proper LoaderCallbacks interface and the methods of that interface
 public class MainActivity extends AppCompatActivity implements ForecastAdapterOnClickHandler,
@@ -127,19 +128,19 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
     // existing FetchWeatherTask.
     @Override
     public Loader<String[]> onCreateLoader(int id, final Bundle args) {
-        return new AsyncTaskLoader<String[]>() {
+        return new AsyncTaskLoader<String[]>(this) {
 
-            private String cachedWeatherData;
+            private String[] cachedWeatherData;
 
             @Override
             public String[] loadInBackground() {
-                String weatherLoc = args.getString(WEATHER_LOC);
+                String[] weatherLoc = args.getStringArray(WEATHER_LOC);
 
-                if (weatherLoc == null || TextUtils.isEmpty((weatherLoc))) {
+                if (weatherLoc == null || TextUtils.isEmpty((weatherLoc[0]))) {
                     return null;
                 }
 
-                URL weatherRequestUrl = NetworkUtils.buildUrl(weatherLoc);
+                URL weatherRequestUrl = NetworkUtils.buildUrl(weatherLoc[0]);
                 String[] simpleJsonWeatherData = {};
 
                 try {
@@ -156,32 +157,36 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
                 return simpleJsonWeatherData;
             }
 
-            // TODO (3) Cache the weather data in a member variable and deliver it in onStartLoading.
+            // COMP (3) Cache the weather data in a member variable and deliver it in
+            // onStartLoading.
             @Override
             protected void onStartLoading() {
             /* If there's no zip code, there's nothing to look up. */
-                if (params.length == 0) {
-                    return null;
-                }
-
-                }
                 super.onStartLoading();
 
                 if (cachedWeatherData != null) {
-                    cachedWeatherData =
+                    cachedWeatherData = args.getStringArray(WEATHER_LOC);
+                    deliverResult(cachedWeatherData);
                 }
+            }
+
+            @Override
+            public void deliverResult(String[] data) {
+                cachedWeatherData = Arrays.copyOf(data);
+
+                super.deliverResult(data);
             }
         };
     }
 
     // TODO (4) When the load is finished, show either the data or an error message if there is no data
     @Override
-    public void onLoadFinished(Loader<String> loader, String data) {
+    public void onLoadFinished(Loader<String[]> loader, String[] data) {
 
     }
 
     @Override
-    public void onLoaderReset(Loader<String> loader) {
+    public void onLoaderReset(Loader<String[]> loader) {
 
     }
 
@@ -240,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
 
         @Override
         protected String[] doInBackground(String... params) {
-
+            return null;
         }
 
         @Override
