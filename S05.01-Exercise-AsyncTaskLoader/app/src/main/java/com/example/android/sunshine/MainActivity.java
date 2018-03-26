@@ -179,9 +179,17 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         };
     }
 
-    // TODO (4) When the load is finished, show either the data or an error message if there is no data
+    // COMP (4) When the load is finished, show either the data or an error message if there is no
+    // data
     @Override
     public void onLoadFinished(Loader<String[]> loader, String[] data) {
+        mLoadingIndicator.setVisibility(View.INVISIBLE);
+        if (data == null) {
+            showErrorMessage();
+        } else {
+            mForecastAdapter.setWeatherData(data);
+            showWeatherDataView();
+        }
 
     }
 
