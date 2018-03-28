@@ -15,14 +15,13 @@
  */
 package com.example.android.sunshine;
 
-import android.app.LoaderManager;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,8 +38,6 @@ import com.example.android.sunshine.ForecastAdapter.ForecastAdapterOnClickHandle
 import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.utilities.NetworkUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
-
-import org.w3c.dom.Text;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -112,8 +109,12 @@ public class MainActivity extends AppCompatActivity implements
 
         // COMP (7) Remove the code for the AsyncTask and initialize the AsyncTaskLoader
         /* Once all of our views are setup, we can load the weather data. */
-        LoaderManager mainLoaderManager = getLoaderManager();
-        mainLoaderManager.initLoader(WEATHER_LOADER, null, this);
+        Bundle bundle = new Bundle();
+
+        // I suppose there is some merit in create a specific, dedicated callback variable like
+        // this. he, he. Pun intended.
+        LoaderManager.LoaderCallbacks<String[]> callback = MainActivity.this;
+        getSupportLoaderManager().initLoader(WEATHER_LOADER, bundle, this);
     }
 
     /**
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements
      * background method to get the weather data in the background.
      */
     private void loadWeatherData() {
-        showWeatherDataView();
+
 
         String location = SunshinePreferences.getPreferredWeatherLocation(this);
         Bundle bundle = new Bundle();
@@ -255,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements
      * page of Android's developer site:
      *
      * @see <a"http://developer.android.com/guide/components/intents-common.html#Maps">
-     *
+     * <p>
      * Hint: Hold Command on Mac or Control on Windows and click that link
      * to automagically open the Common Intents page
      */
