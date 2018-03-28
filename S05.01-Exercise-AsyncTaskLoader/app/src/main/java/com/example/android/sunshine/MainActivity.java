@@ -143,10 +143,6 @@ public class MainActivity extends AppCompatActivity implements
                 String weatherLoc = SunshinePreferences.getPreferredWeatherLocation
                         (MainActivity.this);
 
-                if (weatherLoc == null || TextUtils.isEmpty((weatherLoc))) {
-                    return null;
-                }
-
                 URL weatherRequestUrl = NetworkUtils.buildUrl(weatherLoc);
                 String[] simpleJsonWeatherData = {};
 
