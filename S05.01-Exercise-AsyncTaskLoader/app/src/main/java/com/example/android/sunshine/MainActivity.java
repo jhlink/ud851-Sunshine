@@ -46,13 +46,14 @@ import java.net.URL;
 import java.util.Arrays;
 
 // COMP (1) Implement the proper LoaderCallbacks interface and the methods of that interface
-public class MainActivity extends AppCompatActivity implements ForecastAdapterOnClickHandler,
+public class MainActivity extends AppCompatActivity implements
+        ForecastAdapterOnClickHandler,
         LoaderManager.LoaderCallbacks<String[]> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final String KEY_WEATHER_LOCATION = "WEATHER_LOCATION";
-    private static final String KEY_WEATHER_LOADER = "WEATHER_LOADER";
+    private static final int WEATHER_LOADER = 22;
 
     private RecyclerView mRecyclerView;
     private ForecastAdapter mForecastAdapter;
@@ -109,9 +110,10 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
          */
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
 
-        // TODO (7) Remove the code for the AsyncTask and initialize the AsyncTaskLoader
+        // COMP (7) Remove the code for the AsyncTask and initialize the AsyncTaskLoader
         /* Once all of our views are setup, we can load the weather data. */
-        loadWeatherData();
+        LoaderManager mainLoaderManager = getLoaderManager();
+        mainLoaderManager.initLoader(WEATHER_LOADER, null, this);
     }
 
     /**
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         bundle.putString(KEY_WEATHER_LOCATION, location);
 
         LoaderManager mainLoaderManager = getLoaderManager();
-        mainLoaderManager.restartLoader(KEY_WEATHER_LOADER, location, this);
+        mainLoaderManager.restartLoader(WEATHER_LOADER, bundle, this);
     }
 
     // COMP (2) Within onCreateLoader, return a new AsyncTaskLoader that looks a lot like the
@@ -177,8 +179,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
 
             @Override
             public void deliverResult(String[] data) {
-                cachedWeatherData = Arrays.copyOf(data);
-
+                cachedWeatherData = Arrays.copyOf(data, data.length);
                 super.deliverResult(data);
             }
         };
