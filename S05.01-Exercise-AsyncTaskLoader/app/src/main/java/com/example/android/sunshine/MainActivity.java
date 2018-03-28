@@ -15,13 +15,13 @@
  */
 package com.example.android.sunshine;
 
-import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.content.AsyncTaskLoader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -122,13 +122,11 @@ public class MainActivity extends AppCompatActivity implements
      * background method to get the weather data in the background.
      */
     private void loadWeatherData() {
-
-
         String location = SunshinePreferences.getPreferredWeatherLocation(this);
         Bundle bundle = new Bundle();
         bundle.putString(KEY_WEATHER_LOCATION, location);
 
-        LoaderManager mainLoaderManager = getLoaderManager();
+        LoaderManager mainLoaderManager = getSupportLoaderManager();
         mainLoaderManager.restartLoader(WEATHER_LOADER, bundle, this);
     }
 
@@ -138,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements
     public Loader<String[]> onCreateLoader(int id, final Bundle args) {
         return new AsyncTaskLoader<String[]>(this) {
 
-            private String[] cachedWeatherData;
+            private String[] cachedWeatherData = null;
 
             @Override
             public String[] loadInBackground() {
