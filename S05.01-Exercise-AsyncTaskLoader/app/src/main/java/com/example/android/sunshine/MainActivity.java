@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private static final String WEATHER_LOC = "location";
+    private static final String KEY_WEATHER_LOCATION = "WEATHER_LOCATION";
+    private static final String KEY_WEATHER_LOADER = "WEATHER_LOADER";
 
     private RecyclerView mRecyclerView;
     private ForecastAdapter mForecastAdapter;
@@ -121,7 +122,11 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         showWeatherDataView();
 
         String location = SunshinePreferences.getPreferredWeatherLocation(this);
-        new FetchWeatherTask().execute(location);
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_WEATHER_LOCATION, location);
+
+        LoaderManager mainLoaderManager = getLoaderManager();
+        mainLoaderManager.restartLoader(KEY_WEATHER_LOADER, location, this);
     }
 
     // COMP (2) Within onCreateLoader, return a new AsyncTaskLoader that looks a lot like the
@@ -134,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
 
             @Override
             public String[] loadInBackground() {
-                String[] weatherLoc = args.getStringArray(WEATHER_LOC);
+                String[] weatherLoc = args.getStringArray(KEY_WEATHER_LOCATION);
 
                 if (weatherLoc == null || TextUtils.isEmpty((weatherLoc[0]))) {
                     return null;
@@ -165,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
                 super.onStartLoading();
 
                 if (cachedWeatherData != null) {
-                    cachedWeatherData = args.getStringArray(WEATHER_LOC);
+                    cachedWeatherData = args.getStringArray(KEY_WEATHER_LOCATION);
                     deliverResult(cachedWeatherData);
                 }
             }
@@ -241,32 +246,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
     }
 
-
-    // TODO (6) Remove any and all code from MainActivity that references FetchWeatherTask
-    public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            mLoadingIndicator.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected String[] doInBackground(String... params) {
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String[] weatherData) {
-            mLoadingIndicator.setVisibility(View.INVISIBLE);
-            if (weatherData != null) {
-                showWeatherDataView();
-                mForecastAdapter.setWeatherData(weatherData);
-            } else {
-                showErrorMessage();
-            }
-        }
-    }
+    // COMP (6) Remove any and all code from MainActivity that references FetchWeatherTask
 
     /**
      * This method uses the URI scheme for showing a location found on a
@@ -307,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        // TODO (5) Refactor the refresh functionality to work with our AsyncTaskLoader
+        // COMP (5) Refactor the refresh functionality to work with our AsyncTaskLoader
         if (id == R.id.action_refresh) {
             mForecastAdapter.setWeatherData(null);
             loadWeatherData();
