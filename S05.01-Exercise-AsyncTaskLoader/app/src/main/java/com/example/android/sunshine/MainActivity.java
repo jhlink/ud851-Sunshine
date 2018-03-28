@@ -168,11 +168,11 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             protected void onStartLoading() {
             /* If there's no zip code, there's nothing to look up. */
-                super.onStartLoading();
-
                 if (cachedWeatherData != null) {
-                    cachedWeatherData = args.getStringArray(KEY_WEATHER_LOCATION);
                     deliverResult(cachedWeatherData);
+                } else {
+                    mLoadingIndicator.setVisibility(View.VISIBLE);
+                    forceLoad();
                 }
             }
 
