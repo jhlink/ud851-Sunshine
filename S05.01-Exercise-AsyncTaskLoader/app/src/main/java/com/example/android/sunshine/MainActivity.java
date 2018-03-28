@@ -140,13 +140,14 @@ public class MainActivity extends AppCompatActivity implements
 
             @Override
             public String[] loadInBackground() {
-                String[] weatherLoc = args.getStringArray(KEY_WEATHER_LOCATION);
+                String weatherLoc = SunshinePreferences.getPreferredWeatherLocation
+                        (MainActivity.this);
 
-                if (weatherLoc == null || TextUtils.isEmpty((weatherLoc[0]))) {
+                if (weatherLoc == null || TextUtils.isEmpty((weatherLoc))) {
                     return null;
                 }
 
-                URL weatherRequestUrl = NetworkUtils.buildUrl(weatherLoc[0]);
+                URL weatherRequestUrl = NetworkUtils.buildUrl(weatherLoc);
                 String[] simpleJsonWeatherData = {};
 
                 try {
