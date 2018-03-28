@@ -117,19 +117,6 @@ public class MainActivity extends AppCompatActivity implements
         getSupportLoaderManager().initLoader(WEATHER_LOADER, bundle, this);
     }
 
-    /**
-     * This method will get the user's preferred location for weather, and then tell some
-     * background method to get the weather data in the background.
-     */
-    private void loadWeatherData() {
-        String location = SunshinePreferences.getPreferredWeatherLocation(this);
-        Bundle bundle = new Bundle();
-        bundle.putString(KEY_WEATHER_LOCATION, location);
-
-        LoaderManager mainLoaderManager = getSupportLoaderManager();
-        mainLoaderManager.restartLoader(WEATHER_LOADER, bundle, this);
-    }
-
     // COMP (2) Within onCreateLoader, return a new AsyncTaskLoader that looks a lot like the
     // existing FetchWeatherTask.
     @Override
@@ -287,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements
         // COMP (5) Refactor the refresh functionality to work with our AsyncTaskLoader
         if (id == R.id.action_refresh) {
             mForecastAdapter.setWeatherData(null);
-            loadWeatherData();
+            getSupportLoaderManager().restartLoader(WEATHER_LOADER, null, this) ;
             return true;
         }
 
