@@ -114,9 +114,10 @@ public class SunshinePreferences {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String unitsKey = context.getString(R.string.pref_units_key);
         String metricKey = context.getString(R.string.pref_units_metric);
+        String prefUnits = sharedPreferences.getString(unitsKey, metricKey);
 
         boolean isMetricResult = false;
-        if (TextUtils.equals(unitsKey, metricKey)) {
+        if (TextUtils.equals(prefUnits, metricKey)) {
             isMetricResult = true;
         }
         /** This will be implemented in a future lesson **/
