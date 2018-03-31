@@ -328,7 +328,18 @@ public class MainActivity extends AppCompatActivity implements
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
     }
 
-    // TODO (7) In onStart, if preferences have been changed, refresh the data and set the flag to false
+    // COMP (7) In onStart, if preferences have been changed, refresh the data and set the flag to
+    // false
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (preferenceUpdate) {
+            getSupportLoaderManager().restartLoader(FORECAST_LOADER_ID, null, this);
+            preferenceUpdate = false;
+        }
+    }
+
 
     // TODO (8) Override onDestroy and unregister MainActivity as a SharedPreferenceChangedListener
 
