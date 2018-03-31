@@ -19,7 +19,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.android.sunshine.data.WeatherContract.*
+import com.example.android.sunshine.data.WeatherContract.*;
 
 /**
  * Manages a local database for weather data.
@@ -44,7 +44,7 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_WEATHER_TABLE = "CREATE TABLE " + WeatherEntry
                 .TABLE_NAME + " (" +
-                WeatherEntry._ID + " INCREMENT PRIMARY KEY AUTOINCREMENT," +
+                WeatherEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 WeatherEntry.COLUMN_DEGREES + " INTEGER NOT NULL," +
                 WeatherEntry.COLUMN_HUMIDITY + " REAL NOT NULL," +
                 WeatherEntry.COLUMN_DATE + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
