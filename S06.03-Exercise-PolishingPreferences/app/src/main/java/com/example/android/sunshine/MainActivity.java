@@ -272,9 +272,10 @@ public class MainActivity extends AppCompatActivity implements
      * open the Common Intents page
      */
     private void openLocationInMap() {
-        // TODO (9) Use preferred location rather than a default location to display in the map
-        String addressString = "1600 Ampitheatre Parkway, CA";
-        Uri geoLocation = Uri.parse("geo:0,0?q=" + addressString);
+        // COMP (9) Use preferred location rather than a default location to display in the map
+        String preferredLocation = SunshinePreferences.getPreferredWeatherLocation(this);
+
+        Uri geoLocation = Uri.parse("geo:0,0?q=" + preferredLocation);
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(geoLocation);
