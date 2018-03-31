@@ -52,7 +52,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         // TODO (12) Register SettingsFragment (this) as a SharedPreferenceChangedListener in onStart
 
-        // TODO (11) Override onSharedPreferenceChanged to update non CheckBoxPreferences when they are changed
+        // COMP (11) Override onSharedPreferenceChanged to update non CheckBoxPreferences when they
+        // are changed
     }
 
     @Override
