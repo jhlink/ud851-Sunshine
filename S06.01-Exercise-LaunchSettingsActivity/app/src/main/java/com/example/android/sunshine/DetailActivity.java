@@ -1,5 +1,6 @@
 package com.example.android.sunshine;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
@@ -47,13 +48,38 @@ public class DetailActivity extends AppCompatActivity {
         return shareIntent;
     }
 
+    private void shareForecast() {
+        Intent shareIntent = createShareForecastIntent();
+        startActivity(shareIntent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail, menu);
-        MenuItem menuItem = menu.findItem(R.id.action_share);
-        menuItem.setIntent(createShareForecastIntent());
         return true;
     }
 
-    // TODO (7) Launch SettingsActivity when the Settings option is clicked
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_share:
+                shareForecast();
+                return true;
+
+            case R.id.action_settings:
+                openSettings();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void openSettings() {
+        Context context = this;
+        Class destinationClass = SettingsActivity.class;
+        Intent intentToStartSettingsActivity = new Intent(context, destinationClass);
+        startActivity(intentToStartSettingsActivity);
+    }
+
+    // COMP (7) Launch SettingsActivity when the Settings option is clicked
 }
