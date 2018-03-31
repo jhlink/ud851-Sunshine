@@ -52,7 +52,7 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 WeatherEntry.COLUMN_MIN_TEMP + " INTEGER NOT NULL," +
                 WeatherEntry.COLUMN_PRESSURE + " INTEGER NOT NULL," +
                 WeatherEntry.COLUMN_WIND_SPEED + " INTEGER NOT NULL," +
-                WeatherEntry.COLUMN_WEATHER_ID + " INTEGER NOT NULL," +
+                WeatherEntry.COLUMN_WEATHER_ID + " INTEGER NOT NULL" +
                 " );";
 
         db.execSQL(SQL_CREATE_WEATHER_TABLE);
