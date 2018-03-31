@@ -39,13 +39,14 @@ public class SettingsActivity extends AppCompatActivity {
         // Do steps 5 - 11 within SettingsFragment
         // TODO (10) Implement OnSharedPreferenceChangeListener from SettingsFragment
 
-        // TODO (8) Create a method called setPreferenceSummary that accepts a Preference and an Object and sets the summary of the preference
+        // COMP (8) Create a method called setPreferenceSummary that accepts a Preference and an
+        // Object and sets the summary of the preference
 
         // COMP (5) Override onCreatePreferences and add the preference xml file using
         // addPreferencesFromResource
 
         // Do step 9 within onCreatePreference
-        // TODO (9) Set the preference summary on each preference that isn't a CheckBoxPreference
+        // COMP (9) Set the preference summary on each preference that isn't a CheckBoxPreference
 
         // TODO (13) Unregister SettingsFragment (this) as a SharedPreferenceChangedListener in onStop
 
