@@ -67,7 +67,7 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
 
                 "CREATE TABLE " + WeatherEntry.TABLE_NAME + " (" +
 
-//              TODO (1) Append NOT NULL to each column's type declaration except for the _ID
+//              COMP (1) Append NOT NULL to each column's type declaration except for the _ID
                 /*
                  * WeatherEntry did not explicitly declare a column called "_ID". However,
                  * WeatherEntry implements the interface, "BaseColumns", which does have a field
@@ -75,18 +75,18 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                  */
                 WeatherEntry._ID               + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
 
-                WeatherEntry.COLUMN_DATE       + " INTEGER, "                 +
+                WeatherEntry.COLUMN_DATE       + " INTEGER NOT NULL, "                 +
 
-                WeatherEntry.COLUMN_WEATHER_ID + " INTEGER, "                 +
+                WeatherEntry.COLUMN_WEATHER_ID + " INTEGER NOT NULL, "                 +
 
-                WeatherEntry.COLUMN_MIN_TEMP   + " REAL, "                    +
-                WeatherEntry.COLUMN_MAX_TEMP   + " REAL, "                    +
+                WeatherEntry.COLUMN_MIN_TEMP   + " REAL NOT NULL, "                    +
+                WeatherEntry.COLUMN_MAX_TEMP   + " REAL NOT NULL, "                    +
 
-                WeatherEntry.COLUMN_HUMIDITY   + " REAL, "                    +
-                WeatherEntry.COLUMN_PRESSURE   + " REAL, "                    +
+                WeatherEntry.COLUMN_HUMIDITY   + " REAL NOT NULL, "                    +
+                WeatherEntry.COLUMN_PRESSURE   + " REAL NOT NULL, "                    +
 
-                WeatherEntry.COLUMN_WIND_SPEED + " REAL, "                    +
-                WeatherEntry.COLUMN_DEGREES    + " REAL" + ");";
+                WeatherEntry.COLUMN_WIND_SPEED + " REAL NOT NULL, "                    +
+                WeatherEntry.COLUMN_DEGREES    + " REAL NOT NULL" + ");";
 
         /*
          * After we've spelled out our SQLite table creation statement above, we actually execute
