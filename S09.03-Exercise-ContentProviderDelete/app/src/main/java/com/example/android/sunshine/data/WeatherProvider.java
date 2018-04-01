@@ -322,11 +322,12 @@ public class WeatherProvider extends ContentProvider {
                 result = db.delete(WeatherContract.WeatherEntry.TABLE_NAME,
                         pSelection,
                         selectionArgs);
-                getContext().getContentResolver().notifyChange(uri, null);
-
                 break;
         }
 
+        if (result != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
 //      COMP (3) Return the number of rows deleted
         return result;
     }
