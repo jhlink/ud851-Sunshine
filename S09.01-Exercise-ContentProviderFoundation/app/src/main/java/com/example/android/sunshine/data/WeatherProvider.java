@@ -127,6 +127,20 @@ public class WeatherProvider extends ContentProvider {
                         sortOrder);
                 break;
 
+            case CODE_WEATHER_WITH_DATE:
+                String normalizedDateSegment = uri.getLastPathSegment();
+                String pSelection = COLUMN_DATE + "=?";
+                String[] pSelectionArgs = new String[]{ normalizedDateSegment };
+
+                cursor = db.query(TABLE_NAME,
+                        projection,
+                        pSelection,
+                        pSelectionArgs,
+                        null,
+                        null,
+                        sortOrder);
+                break;
+
             default:
                 throw new RuntimeException("Unknown Uri: " + uri.toString());
         }
