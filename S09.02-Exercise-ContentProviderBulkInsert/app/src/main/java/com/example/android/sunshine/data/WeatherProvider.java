@@ -20,8 +20,13 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+
+import com.example.android.sunshine.utilities.SunshineDateUtils;
+
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.*;
 
 /**
  * This class serves as the ContentProvider for all of Sunshine's data. This class allows us to
@@ -122,7 +127,7 @@ public class WeatherProvider extends ContentProvider {
         return true;
     }
 
-//  TODO (1) Implement the bulkInsert method
+//  COMP (1) Implement the bulkInsert method
     /**
      * Handles requests to insert a set of new rows. In Sunshine, we are only going to be
      * inserting multiple rows of data at a time from a weather forecast. There is no use case
@@ -138,13 +143,53 @@ public class WeatherProvider extends ContentProvider {
      */
     @Override
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
-        throw new RuntimeException("Student, you need to implement the bulkInsert method!");
 
-//          TODO (2) Only perform our implementation of bulkInsert if the URI matches the CODE_WEATHER code
+        SQLiteDatabase db = mOpenHelper.getReadableDatabase();
+        int match = sUriMatcher.match(uri);
 
-//              TODO (3) Return the number of rows inserted from our implementation of bulkInsert
+        int result = 0;
+        switch (match) {
+            case CODE_WEATHER:
+        //  COMP (2) Only perform our implementation of bulkInsert if the URI matches the
+                // CODE_WEATHER code
+                db.beginTransaction();
 
-//          TODO (4) If the URI does match match CODE_WEATHER, return the super implementation of bulkInsert
+                try {
+                    for (ContentValues value: values) {
+                        long weatherDate = value.getAsLong(WeatherContract.WeatherEntry
+                                .COLUMN_DATE);
+
+                        if (!SunshineDateUtils.isDateNormalized(weatherDate)) {
+                            throw new IllegalArgumentException("Data must be normalized to " +
+                                    "insert");
+                        }
+
+                        long _id = db.insert(TABLE_NAME, null, value);
+                        if (_id != -1) {
+                            result++;
+                        }
+                    }
+                    db.setTransactionSuccessful();
+                } finally {
+                    db.endTransaction();
+                }
+
+                if (result > 0) {
+                    getContext().getContentResolver().notifyChange(uri, null);
+                }
+
+                break;
+
+
+            default:
+        //     COMP (4) If the URI does match match CODE_WEATHER, return the super implementation of
+        //     bulkInsert
+               result = super.bulkInsert(uri, values);
+               break;
+        }
+
+        //  COMP (3) Return the number of rows inserted from our implementation of bulkInsert
+        return result;
     }
 
     /**
@@ -206,7 +251,7 @@ public class WeatherProvider extends ContentProvider {
 
                 cursor = mOpenHelper.getReadableDatabase().query(
                         /* Table we are going to query */
-                        WeatherContract.WeatherEntry.TABLE_NAME,
+                        TABLE_NAME,
                         /*
                          * A projection designates the columns we want returned in our Cursor.
                          * Passing null will return all columns of data within the Cursor.
@@ -245,7 +290,7 @@ public class WeatherProvider extends ContentProvider {
              */
             case CODE_WEATHER: {
                 cursor = mOpenHelper.getReadableDatabase().query(
-                        WeatherContract.WeatherEntry.TABLE_NAME,
+                        TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
