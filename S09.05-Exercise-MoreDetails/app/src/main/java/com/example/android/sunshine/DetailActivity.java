@@ -239,7 +239,8 @@ public class DetailActivity extends AppCompatActivity
                     sLowTempValue
             );
 
-            String sHumidity = Double.toString(data.getDouble(INDEX_WEATHER_HUMIDITY));
+            String sHumidity = getString(R.string.format_humidity, data.getFloat
+                    (INDEX_WEATHER_HUMIDITY)))
             mWeatherHumidity.setText(sHumidity);
 
             float sWindSpeed = data.getFloat(INDEX_WEATHER_WIND_SPEED);
