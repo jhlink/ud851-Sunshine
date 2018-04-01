@@ -193,7 +193,6 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
             //  COMP (13) Instead of passing the String from the data array, use the weatherSummary
             // text!
 
-            final TextView weatherSummary = (TextView) v.findViewById(R.id.tv_weather_data);
             String weatherForDay = weatherSummary.getText().toString();
             mClickHandler.onClick(weatherForDay);
         }
