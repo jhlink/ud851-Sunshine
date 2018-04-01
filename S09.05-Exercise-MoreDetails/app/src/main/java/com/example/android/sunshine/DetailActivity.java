@@ -35,6 +35,8 @@ import com.example.android.sunshine.utilities.SunshineWeatherUtils;
 
 import org.w3c.dom.Text;
 
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.*;
+
 public class DetailActivity extends AppCompatActivity {
 //      TODO (21) Implement LoaderManager.LoaderCallbacks<Cursor>
 
@@ -44,8 +46,26 @@ public class DetailActivity extends AppCompatActivity {
      */
     private static final String FORECAST_SHARE_HASHTAG = " #SunshineApp";
 
-//  TODO (18) Create a String array containing the names of the desired data columns from our ContentProvider
-//  TODO (19) Create constant int values representing each column name's position above
+//  COMP (18) Create a String array containing the names of the desired data columns from our ContentProvider
+    public String[] DETAIL_WEATHER_PROJECTION = new String[] {
+        COLUMN_DATE,
+        COLUMN_WEATHER_ID,
+        COLUMN_MAX_TEMP,
+        COLUMN_MIN_TEMP,
+        COLUMN_HUMIDITY,
+        COLUMN_WIND_SPEED,
+        COLUMN_PRESSURE
+    };
+
+//  COMP (19) Create constant int values representing each column name's position above
+    public static final int INDEX_WEATHER_DATE = 0;
+    public static final int INDEX_WEATHER_ID = 1;
+    public static final int INDEX_WEATHER_MAX_TEMP = 2;
+    public static final int INDEX_WEATHER_MIN_TEMP = 3;
+    public static final int INDEX_WEATHER_HUMIDITY = 4;
+    public static final int INDEX_WEATHER_WIND_SPEED = 5;
+    public static final int INDEX_WEATHER_PRESSURE = 6;
+
 //  TODO (20) Create a constant int to identify our loader used in DetailActivity
 
     /* A summary of the forecast that can be shared by clicking the share button in the ActionBar */
