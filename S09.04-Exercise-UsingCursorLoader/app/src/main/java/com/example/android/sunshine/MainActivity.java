@@ -17,16 +17,12 @@ package com.example.android.sunshine;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -38,7 +34,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.android.sunshine.data.SunshinePreferences;
-import com.example.android.sunshine.data.WeatherContract;
 import com.example.android.sunshine.utilities.FakeDataUtils;
 import com.example.android.sunshine.utilities.NetworkUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
@@ -47,20 +42,11 @@ import java.net.URL;
 
 
 public class MainActivity extends AppCompatActivity implements
-//      TODO (15) Remove the implements declaration for SharedPreferences change listener and methods
+//      COMP (15) Remove the implements declaration for SharedPreferences change listener and
+// methods
 //      TODO (20) Implement LoaderCallbacks<Cursor> instead of String[]
         ForecastAdapter.ForecastAdapterOnClickHandler,
-        LoaderManager.LoaderCallbacks<String[]>,
-        SharedPreferences.OnSharedPreferenceChangeListener {
-
-    private final String TAG = MainActivity.class.getSimpleName();
-
-//  TODO (16) Create a String array containing the names of the desired data columns from our ContentProvider
-
-//  TODO (17) Create constant int values representing each column name's position above
-
-//  TODO (37) Remove the error TextView
-    private TextView mErrorMessageDisplay;
+        LoaderManager.LoaderCallbacks<String[]> {
 
     /*
      * This ID will be used to identify the Loader responsible for loading our weather forecast. In
@@ -71,21 +57,24 @@ public class MainActivity extends AppCompatActivity implements
      */
     private static final int ID_FORECAST_LOADER = 44;
 
+//  TODO (16) Create a String array containing the names of the desired data columns from our ContentProvider
+
+//  TODO (17) Create constant int values representing each column name's position above
+    //  TODO (35) Remove the preference change flag
+    private static boolean PREFERENCES_HAVE_BEEN_UPDATED = false;
+    private final String TAG = MainActivity.class.getSimpleName();
+    //  TODO (37) Remove the error TextView
+    private TextView mErrorMessageDisplay;
     private ForecastAdapter mForecastAdapter;
     private RecyclerView mRecyclerView;
     private int mPosition = RecyclerView.NO_POSITION;
-
     private ProgressBar mLoadingIndicator;
-
-    //  TODO (35) Remove the preference change flag
-    private static boolean PREFERENCES_HAVE_BEEN_UPDATED = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
         getSupportActionBar().setElevation(0f);
-
 
 
         FakeDataUtils.insertFakeData(this);
@@ -161,7 +150,6 @@ public class MainActivity extends AppCompatActivity implements
         getSupportLoaderManager().initLoader(ID_FORECAST_LOADER, null, this);
 
 
-
 //      TODO (19) Remove the statement that registers Mainactivity as a preference change listener
         Log.d(TAG, "onCreate: registering preference changed listener");
         /*
@@ -169,8 +157,6 @@ public class MainActivity extends AppCompatActivity implements
          * SharedPreference has changed. Please note that we must unregister MainActivity as an
          * OnSharedPreferenceChanged listener in onDestroy to avoid any memory leaks.
          */
-        PreferenceManager.getDefaultSharedPreferences(this)
-                .registerOnSharedPreferenceChangeListener(this);
     }
 
     /**
@@ -200,12 +186,12 @@ public class MainActivity extends AppCompatActivity implements
     }
 
 //  TODO (21) Refactor onCreateLoader to return a Loader<Cursor>, not Loader<String[]>
+
     /**
      * Instantiate and return a new Loader for the given ID.
      *
-     * @param id The ID whose loader is to be created.
+     * @param id         The ID whose loader is to be created.
      * @param loaderArgs Any arguments supplied by the caller.
-     *
      * @return Return a new Loader instance that is ready to start loading.
      */
     @Override
@@ -272,11 +258,12 @@ public class MainActivity extends AppCompatActivity implements
     }
 
 //  TODO (26) Change onLoadFinished parameter to a Loader<Cursor> instead of a Loader<String[]>
+
     /**
      * Called when a previously created loader has finished its load.
      *
      * @param loader The Loader that has finished.
-     * @param data The data generated by the Loader.
+     * @param data   The data generated by the Loader.
      */
     @Override
     public void onLoadFinished(Loader<String[]> loader, String[] data) {
@@ -293,7 +280,6 @@ public class MainActivity extends AppCompatActivity implements
             showWeatherDataView();
         }
     }
-
 
 
     /**
@@ -340,6 +326,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
 //  TODO (33) Delete showErrorMessage
+
     /**
      * This method will make the error message visible and hide the weather
      * View.
@@ -360,10 +347,8 @@ public class MainActivity extends AppCompatActivity implements
      * This is where we inflate and set up the menu for this Activity.
      *
      * @param menu The options menu in which you place your items.
-     *
      * @return You must return true for the menu to be displayed;
-     *         if you return false it will not be shown.
-     *
+     * if you return false it will not be shown.
      * @see #onPrepareOptionsMenu
      * @see #onOptionsItemSelected
      */
@@ -381,7 +366,6 @@ public class MainActivity extends AppCompatActivity implements
      * Callback invoked when a menu item was selected from this Activity's menu.
      *
      * @param item The menu item that was selected by the user
-     *
      * @return true if you handle the menu click here, false otherwise
      */
     @Override
@@ -401,18 +385,4 @@ public class MainActivity extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        /*
-         * Set this flag to true so that when control returns to MainActivity, it can refresh the
-         * data.
-         *
-         * This isn't the ideal solution because there really isn't a need to perform another
-         * GET request just to change the units, but this is the simplest solution that gets the
-         * job done for now. Later in this course, we are going to show you more elegant ways to
-         * handle converting the units from celsius to fahrenheit and back without hitting the
-         * network again by keeping a copy of the data in a manageable format.
-         */
-        PREFERENCES_HAVE_BEEN_UPDATED = true;
-    }
 }
