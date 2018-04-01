@@ -55,6 +55,7 @@ public class DetailActivity extends AppCompatActivity
         COLUMN_MIN_TEMP,
         COLUMN_HUMIDITY,
         COLUMN_WIND_SPEED,
+        COLUMN_DEGREES,
         COLUMN_PRESSURE
     };
 
@@ -65,7 +66,8 @@ public class DetailActivity extends AppCompatActivity
     public static final int INDEX_WEATHER_MIN_TEMP = 3;
     public static final int INDEX_WEATHER_HUMIDITY = 4;
     public static final int INDEX_WEATHER_WIND_SPEED = 5;
-    public static final int INDEX_WEATHER_PRESSURE = 6;
+    public static final int INDEX_WEATHER_WIND_DEGREE = 6;
+    public static final int INDEX_WEATHER_PRESSURE = 7;
 
 //  COMP (20) Create a constant int to identify our loader used in DetailActivity
     public static final int DETAIL_ACTIVITY_LOADER_ID = 42;
@@ -203,17 +205,76 @@ public class DetailActivity extends AppCompatActivity
         }
     }
 
+    private void displayDataInTextViews(Cursor data) {
+        if (data != null) {
+            long normalizedDate = data.getLong(INDEX_WEATHER_DATE);
+            String readableDate = SunshineDateUtils.getFriendlyDateString(
+                    this,
+                    normalizedDate,
+                    false
+            );
+            mWeatherDate.setText(readableDate);
 
-//  TODO (24) Override onLoadFinished
-//      TODO (25) Check before doing anything that the Cursor has valid data
-//      TODO (26) Display a readable data string
-//      TODO (27) Display the weather description (using SunshineWeatherUtils)
-//      TODO (28) Display the high temperature
-//      TODO (29) Display the low temperature
-//      TODO (30) Display the humidity
-//      TODO (31) Display the wind speed and direction
-//      TODO (32) Display the pressure
-//      TODO (33) Store a forecast summary in mForecastSummary
+            int sWeatherID = data.getInt(INDEX_WEATHER_ID);
+            String weatherDescription = SunshineWeatherUtils.getStringForWeatherCondition(
+                    this,
+                    sWeatherID
+            );
+            mWeatherDescription.setText(weatherDescription);
+
+            double sHighTempValue = data.getDouble(INDEX_WEATHER_MAX_TEMP);
+            String sHighTempInCels = Double.toString(sHighTempValue);
+            mWeatherHighTemp.setText(sHighTempInCels);
+
+            double sLowTempValue = data.getDouble(INDEX_WEATHER_MIN_TEMP);
+            String sLowTempInCels = Double.toString(sLowTempValue);
+            mWeatherLowTemp.setText(sLowTempInCels);
+
+            String formattedTemps = SunshineWeatherUtils.formatHighLows(
+                    this,
+                    sHighTempValue,
+                    sLowTempValue
+            );
+
+            String sHumidity = Double.toString(data.getDouble(INDEX_WEATHER_HUMIDITY));
+            mWeatherHumidity.setText(sHumidity);
+
+            float sWindSpeed = data.getFloat(INDEX_WEATHER_WIND_SPEED);
+            float sWindDir = data.getFloat(INDEX_WEATHER_WIND_DEGREE);
+            String formattedWindSpeedAndDir = SunshineWeatherUtils.getFormattedWind(
+                    this,
+                    sWindSpeed,
+                    sWindDir
+            );
+            mWeatherWind.setText(formattedWindSpeedAndDir);
+
+            String sPressure = Double.toString(data.getDouble(INDEX_WEATHER_PRESSURE));
+            mWeatherPressure.setText(sPressure);
+
+            mForecastSummary = readableDate + ": " + weatherDescription + " -- " +
+                    formattedTemps + " -- " + sHumidity + " -- " +
+                    formattedWindSpeedAndDir + " -- " + sPressure;
+
+        }
+    }
+
+
+    //  COMP (24) Override onLoadFinished
+//      COMP (25) Check before doing anything that the Cursor has valid data
+//      COMP (26) Display a readable data string
+//      COMP (27) Display the weather description (using SunshineWeatherUtils)
+//      COMP (28) Display the high temperature
+//      COMP (29) Display the low temperature
+//      COMP (30) Display the humidity
+//      COMP (31) Display the wind speed and direction
+//      COMP (32) Display the pressure
+//      COMP (33) Store a forecast summary in mForecastSummary
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if (data != null) {
+
+        }
+    }
 
 
 //  TODO (34) Override onLoaderReset, but don't do anything in it yet
