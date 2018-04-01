@@ -181,7 +181,8 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
 //              cursor
 
             int adapterPosition = getAdapterPosition();
-            long dateMillis = mCursor.getLong(adapterPosition);
+            mCursor.moveToPosition(adapterPosition);
+            long dateMillis = mCursor.getLong(MainActivity.INDEX_WEATHER_DATE);
             mClickHandler.onClick(dateMillis);
         }
     }
