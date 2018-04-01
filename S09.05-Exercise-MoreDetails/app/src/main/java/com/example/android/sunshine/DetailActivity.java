@@ -104,12 +104,9 @@ public class DetailActivity extends AppCompatActivity
         mWeatherPressure = (TextView) findViewById(R.id.tv_detail_pressure);
 
 //      COMP (14) Remove the code that checks for extra text
-        Intent intentThatStartedThisActivity = getIntent();
-        if (intentThatStartedThisActivity != null) {
-            mUri = intentThatStartedThisActivity.getData();
-            if (mUri == null) {
-                throw new NullPointerException("No reference to Uri in Intent");
-            }
+        mUri = getIntent().getData();
+        if (mUri == null) {
+            throw new NullPointerException("No reference to Uri in Intent");
         }
 //      COMP (16) Use getData to get a reference to the URI passed with this Activity's Intent
 //      COMP (17) Throw a NullPointerException if that URI is null
