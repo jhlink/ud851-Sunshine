@@ -321,7 +321,7 @@ public class WeatherProvider extends ContentProvider {
             case CODE_WEATHER:
                 result = db.delete(WeatherContract.WeatherEntry.TABLE_NAME,
                         pSelection,
-                        null);
+                        selectionArgs);
                 getContext().getContentResolver().notifyChange(uri, null);
 
                 break;
