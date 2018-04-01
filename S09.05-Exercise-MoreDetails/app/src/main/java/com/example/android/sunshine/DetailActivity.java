@@ -37,8 +37,9 @@ import org.w3c.dom.Text;
 
 import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.*;
 
-public class DetailActivity extends AppCompatActivity {
-//      TODO (21) Implement LoaderManager.LoaderCallbacks<Cursor>
+public class DetailActivity extends AppCompatActivity
+    implements LoaderManager.LoaderCallbacks<Cursor> {
+//      COMP (21) Implement LoaderManager.LoaderCallbacks<Cursor>
 
     /*
      * In this Activity, you can share the selected day's forecast. No social sharing is complete
@@ -66,7 +67,8 @@ public class DetailActivity extends AppCompatActivity {
     public static final int INDEX_WEATHER_WIND_SPEED = 5;
     public static final int INDEX_WEATHER_PRESSURE = 6;
 
-//  TODO (20) Create a constant int to identify our loader used in DetailActivity
+//  COMP (20) Create a constant int to identify our loader used in DetailActivity
+    public static final int DETAIL_ACTIVITY_LOADER_ID = 42;
 
     /* A summary of the forecast that can be shared by clicking the share button in the ActionBar */
     private String mForecastSummary;
@@ -180,8 +182,27 @@ public class DetailActivity extends AppCompatActivity {
         return shareIntent;
     }
 
-//  TODO (22) Override onCreateLoader
-//          TODO (23) If the loader requested is our detail loader, return the appropriate CursorLoader
+//  COMP (22) Override onCreateLoader
+//      COMP (23) If the loader requested is our detail loader, return the appropriate CursorLoader
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
+        switch (id)  {
+            case DETAIL_ACTIVITY_LOADER_ID:
+
+               return new CursorLoader(
+                       this,
+                       mUri,
+                       DETAIL_WEATHER_PROJECTION,
+                       null,
+                       null,
+                       null);
+
+            default:
+                throw new RuntimeException("Loader not implemented: " + id);
+        }
+    }
+
 
 //  TODO (24) Override onLoadFinished
 //      TODO (25) Check before doing anything that the Cursor has valid data
