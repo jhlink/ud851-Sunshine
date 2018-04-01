@@ -277,21 +277,7 @@ public class MainActivity extends AppCompatActivity implements
         mRecyclerView.setVisibility(View.VISIBLE);
     }
 
-//  TODO (33) Delete showErrorMessage
-
-    /**
-     * This method will make the error message visible and hide the weather
-     * View.
-     * <p>
-     * Since it is okay to redundantly set the visibility of a View, we don't
-     * need to check whether each view is currently visible or invisible.
-     */
-    private void showErrorMessage() {
-        /* First, hide the currently visible data */
-        mRecyclerView.setVisibility(View.INVISIBLE);
-        /* Then, show the error */
-        mErrorMessageDisplay.setVisibility(View.VISIBLE);
-    }
+//  COMP (33) Delete showErrorMessage
 
 //  TODO (34) Create a method called showLoading that shows the loading indicator and hides the data
 
