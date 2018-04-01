@@ -23,8 +23,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.example.android.sunshine.utilities.SunshineDateUtils;
+
+import org.w3c.dom.Text;
 
 /**
  * This class serves as the ContentProvider for all of Sunshine's data. This class allows us to
@@ -304,18 +307,23 @@ public class WeatherProvider extends ContentProvider {
      */
     @Override
     public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
-
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         int match = sUriMatcher.match(uri);
 
         int result = 0;
+        String pSelection = selection;
+        if (TextUtils.isEmpty(pSelection)) {
+            pSelection = "1";
+        }
         switch (match) {
 //          COMP (2) Only implement the functionality, given the proper URI, to delete ALL rows in
 //              the weather table
             case CODE_WEATHER:
-                result = db.delete(WeatherContract.WeatherEntry.TABLE_NAME, "1",
+                result = db.delete(WeatherContract.WeatherEntry.TABLE_NAME,
+                        pSelection,
                         null);
                 getContext().getContentResolver().notifyChange(uri, null);
+
                 break;
         }
 
