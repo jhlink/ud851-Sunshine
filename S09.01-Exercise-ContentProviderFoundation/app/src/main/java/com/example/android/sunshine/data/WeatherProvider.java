@@ -22,8 +22,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.*;
 
 /**
  * This class serves as the ContentProvider for all of Sunshine's data. This class allows us to
@@ -88,7 +91,7 @@ public class WeatherProvider extends ContentProvider {
         throw new RuntimeException("Student, you need to implement the bulkInsert mehtod!");
     }
 
-//  TODO (8) Provide an implementation for the query method
+//  COMP (8) Provide an implementation for the query method
     /**
      * Handles query requests from clients. We will use this method in Sunshine to query for all
      * of our weather data as well as to query for the weather on a particular day.
@@ -107,11 +110,33 @@ public class WeatherProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
-        throw new RuntimeException("Student, implement the query method!");
 
-//      TODO (9) Handle queries on both the weather and weather with date URI
+//      COMP (9) Handle queries on both the weather and weather with date URI
+        SQLiteDatabase db = mOpenHelper.getReadableDatabase();
+        int match = sUriMatcher.match(uri);
 
-//      TODO (10) Call setNotificationUri on the cursor and then return the cursor
+        Cursor cursor = null;
+        switch (match) {
+            case CODE_WEATHER:
+                cursor = db.query(TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder);
+                break;
+
+            default:
+                throw new RuntimeException("Unknown Uri: " + uri.toString());
+        }
+
+//      COMP (10) Call setNotificationUri on the cursor and then return the cursor
+        ContentResolver contentResolver = getContext().getContentResolver();
+        cursor.setNotificationUri(contentResolver, uri);
+
+        return cursor;
+
     }
 
     /**
