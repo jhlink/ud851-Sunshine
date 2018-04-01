@@ -252,7 +252,7 @@ public class DetailActivity extends AppCompatActivity
             );
             mWeatherWind.setText(formattedWindSpeedAndDir);
 
-            String sPressure = Double.toString(data.getDouble(INDEX_WEATHER_PRESSURE));
+            String sPressure = getString(R.string.format_pressure, data.getDouble(INDEX_WEATHER_PRESSURE));
             mWeatherPressure.setText(sPressure);
 
             mForecastSummary = readableDate + ": " + weatherDescription + " -- " +
