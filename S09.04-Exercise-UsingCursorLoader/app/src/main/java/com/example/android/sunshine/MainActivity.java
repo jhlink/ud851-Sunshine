@@ -279,7 +279,12 @@ public class MainActivity extends AppCompatActivity implements
 
 //  COMP (33) Delete showErrorMessage
 
-//  TODO (34) Create a method called showLoading that shows the loading indicator and hides the data
+//  COMP (34) Create a method called showLoading that shows the loading indicator and hides the data
+
+    private void showLoading() {
+        mLoadingIndicator.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.INVISIBLE);
+    }
 
     /**
      * This is where we inflate and set up the menu for this Activity.
