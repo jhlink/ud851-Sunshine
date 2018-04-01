@@ -17,6 +17,7 @@ package com.example.android.sunshine;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -34,11 +35,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.android.sunshine.data.SunshinePreferences;
+import com.example.android.sunshine.data.WeatherContract;
+import com.example.android.sunshine.data.WeatherDbHelper;
+import com.example.android.sunshine.data.WeatherProvider;
 import com.example.android.sunshine.utilities.FakeDataUtils;
 import com.example.android.sunshine.utilities.NetworkUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
 import java.net.URL;
+
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.*;
 
 
 public class MainActivity extends AppCompatActivity implements
@@ -57,9 +63,22 @@ public class MainActivity extends AppCompatActivity implements
      */
     private static final int ID_FORECAST_LOADER = 44;
 
-//  TODO (16) Create a String array containing the names of the desired data columns from our ContentProvider
+//  COMP (16) Create a String array containing the names of the desired data columns from our ContentProvider
+    public String[] dataColumns = new String[] {
+            COLUMN_DATE,
+            COLUMN_WEATHER_ID,
+            COLUMN_MIN_TEMP,
+            COLUMN_MAX_TEMP
+    };
 
-//  TODO (17) Create constant int values representing each column name's position above
+//  COMP (17) Create constant int values representing each column name's position above
+
+    public final static int INDEX_DATE = 0;
+    public final static int INDEX_WEATHER_ID = 1;
+    public final static int INDEX_MIN_TEMP = 2;
+    public final static int INDEX_MAX_TEMP = 3;
+
+
     //  TODO (35) Remove the preference change flag
     private static boolean PREFERENCES_HAVE_BEEN_UPDATED = false;
     private final String TAG = MainActivity.class.getSimpleName();
