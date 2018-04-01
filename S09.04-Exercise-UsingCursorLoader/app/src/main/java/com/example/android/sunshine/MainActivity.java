@@ -41,6 +41,8 @@ import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COL
 import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_MAX_TEMP;
 import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_MIN_TEMP;
 import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_WEATHER_ID;
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.CONTENT_URI;
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.getSqlSelectForTodayOnwards;
 
 
 public class MainActivity extends AppCompatActivity implements
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements
     //  COMP (35) Remove the preference change flag
     private final String TAG = MainActivity.class.getSimpleName();
     //  COMP (16) Create a String array containing the names of the desired data columns from our ContentProvider
-    public String[] dataColumns = new String[]{
+    public String[] FORECAST_PROJECTION = new String[]{
             COLUMN_DATE,
             COLUMN_WEATHER_ID,
             COLUMN_MIN_TEMP,
@@ -204,7 +206,27 @@ public class MainActivity extends AppCompatActivity implements
 //      COMP (24) Remove the loadInBackground method declaration
 //      COMP (25) Remove the deliverResult method declaration
 //          COMP (22) If the loader requested is our forecast loader, return the appropriate CursorLoader
-        return new CursorLoader(this);
+
+        switch(id) {
+            case ID_FORECAST_LOADER:
+                Uri forecaseQueryUri = CONTENT_URI;
+                String sortOrder = COLUMN_DATE + " ASC";
+
+                String selection = getSqlSelectForTodayOnwards();
+
+                return new CursorLoader(
+                        this,
+                        forecaseQueryUri,
+                        FORECAST_PROJECTION,
+                        selection,
+                        null,
+                        sortOrder);
+
+            default:
+                throw new RuntimeException("Loader Not Implemented: " + id);
+                break;
+        }
+
     }
 
 //  COMP (26) Change onLoadFinished parameter to a Loader<Cursor> instead of a Loader<String[]>
