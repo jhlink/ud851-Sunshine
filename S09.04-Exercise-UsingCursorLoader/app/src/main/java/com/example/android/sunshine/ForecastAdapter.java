@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.android.sunshine.utilities.SunshineDateUtils;
 import com.example.android.sunshine.utilities.SunshineWeatherUtils;
 
 import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_DATE;
@@ -103,23 +104,38 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
 
 //      COMP (7) Generate a weather summary with the date, description, high and low
 
+            String weatherForThisDay = readAndComposeWeatherData();
+
+//      COMP (8) Display the summary that you created above
+
+            forecastAdapterViewHolder.weatherSummary.setText(weatherForThisDay);
+        }
+    }
+
+    private String readAndComposeWeatherData() {
+        String result = "";
+        if (mCursor != null) {
             int weatherDateColIndex = mCursor.getColumnIndex(COLUMN_DATE);
-            String weatherDate = mCursor.getString(weatherDateColIndex);
+            long normalizedWeatherDate = mCursor.getLong(weatherDateColIndex);
+            String friendlyWeatherDate = SunshineDateUtils.getFriendlyDateString(mContext,
+                    normalizedWeatherDate, true);
 
             int weatherDescColIndex = mCursor.getColumnIndex(COLUMN_WEATHER_ID);
             int weatherId = mCursor.getInt(weatherDescColIndex);
             String weatherDesc = SunshineWeatherUtils.getStringForWeatherCondition(mContext, weatherId);
 
             int weatherHighColIndex = mCursor.getColumnIndex(COLUMN_MAX_TEMP);
-            float weatherHighTemp = mCursor.getFloat(weatherHighColIndex);
+            double weatherHighTemp = mCursor.getDouble(weatherHighColIndex);
 
             int weatherLowColIndex = mCursor.getColumnIndex(COLUMN_MIN_TEMP);
-            float weatherLowTemp = mCursor.getFloat(weatherLowColIndex);
+            double weatherLowTemp = mCursor.getDouble(weatherLowColIndex);
+            String formatHighsLows = SunshineWeatherUtils.formatHighLows(mContext,
+                    weatherHighTemp,weatherLowTemp);
 
-//      TODO (8) Display the summary that you created above
-
-            forecastAdapterViewHolder.weatherSummary.setText(weatherForThisDay);
+            result = friendlyWeatherDate + ": " + weatherDesc + " -- " + formatHighsLows;
         }
+
+        return result;
     }
 
     /**
