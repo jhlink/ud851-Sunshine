@@ -255,10 +255,11 @@ public class DetailActivity extends AppCompatActivity
             String sPressure = getString(R.string.format_pressure, data.getDouble(INDEX_WEATHER_PRESSURE));
             mWeatherPressure.setText(sPressure);
 
-            mForecastSummary = readableDate + ": " + weatherDescription + " -- " +
-                    formattedTemps + " -- " + sHumidity + " -- " +
-                    formattedWindSpeedAndDir + " -- " + sPressure;
-
+            mForecastSummary = String.format("%s - %s - %s/%s",
+                    readableDate,
+                    weatherDescription,
+                    sHighTempInCels,
+                    sLowTempInCels);
         }
     }
 
