@@ -205,9 +205,11 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
          */
         @Override
         public void onClick(View v) {
-            //  TODO (13) Instead of passing the String from the data array, use the weatherSummary text!
-            int adapterPosition = getAdapterPosition();
-            String weatherForDay = mWeatherData[adapterPosition];
+            //  COMP (13) Instead of passing the String from the data array, use the weatherSummary
+            // text!
+
+            final TextView weatherSummary = (TextView) v.findViewById(R.id.tv_weather_data);
+            String weatherForDay = weatherSummary.getText().toString();
             mClickHandler.onClick(weatherForDay);
         }
     }
