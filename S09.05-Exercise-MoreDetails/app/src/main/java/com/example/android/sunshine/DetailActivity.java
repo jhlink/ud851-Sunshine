@@ -240,7 +240,7 @@ public class DetailActivity extends AppCompatActivity
             );
 
             String sHumidity = getString(R.string.format_humidity, data.getFloat
-                    (INDEX_WEATHER_HUMIDITY)))
+                    (INDEX_WEATHER_HUMIDITY));
             mWeatherHumidity.setText(sHumidity);
 
             float sWindSpeed = data.getFloat(INDEX_WEATHER_WIND_SPEED);
