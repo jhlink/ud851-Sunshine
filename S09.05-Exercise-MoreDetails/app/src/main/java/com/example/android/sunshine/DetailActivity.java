@@ -114,7 +114,13 @@ public class DetailActivity extends AppCompatActivity
 //      COMP (16) Use getData to get a reference to the URI passed with this Activity's Intent
 //      COMP (17) Throw a NullPointerException if that URI is null
 
-//      TODO (35) Initialize the loader for DetailActivity
+//      COMP (35) Initialize the loader for DetailActivity
+        getSupportLoaderManager().initLoader(
+                DETAIL_ACTIVITY_LOADER_ID,
+                null,
+                this);
+
+
     }
 
     /**
@@ -277,6 +283,9 @@ public class DetailActivity extends AppCompatActivity
     }
 
 
-//  TODO (34) Override onLoaderReset, but don't do anything in it yet
+//  COMP (34) Override onLoaderReset, but don't do anything in it yet
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
 }
