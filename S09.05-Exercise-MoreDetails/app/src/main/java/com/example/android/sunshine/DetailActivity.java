@@ -51,7 +51,8 @@ public class DetailActivity extends AppCompatActivity {
     /* A summary of the forecast that can be shared by clicking the share button in the ActionBar */
     private String mForecastSummary;
 
-//  TODO (15) Declare a private Uri field called mUri
+//  COMP (15) Declare a private Uri field called mUri
+    private Uri mUri;
 
 //  COMP (10) Remove the mWeatherDisplay TextView declaration
 
@@ -78,16 +79,17 @@ public class DetailActivity extends AppCompatActivity {
         mWeatherWind = (TextView) findViewById(R.id.tv_detail_wind);
         mWeatherPressure = (TextView) findViewById(R.id.tv_detail_pressure);
 
-//      TODO (14) Remove the code that checks for extra text
+//      COMP (14) Remove the code that checks for extra text
         Intent intentThatStartedThisActivity = getIntent();
         if (intentThatStartedThisActivity != null) {
-            if (intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
-                mForecastSummary = intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
-                mWeatherDisplay.setText(mForecastSummary);
+            mUri = intentThatStartedThisActivity.getData();
+            if (mUri == null) {
+                throw new NullPointerException("No reference to Uri in Intent");
             }
         }
-//      TODO (16) Use getData to get a reference to the URI passed with this Activity's Intent
-//      TODO (17) Throw a NullPointerException if that URI is null
+//      COMP (16) Use getData to get a reference to the URI passed with this Activity's Intent
+//      COMP (17) Throw a NullPointerException if that URI is null
+
 //      TODO (35) Initialize the loader for DetailActivity
     }
 
