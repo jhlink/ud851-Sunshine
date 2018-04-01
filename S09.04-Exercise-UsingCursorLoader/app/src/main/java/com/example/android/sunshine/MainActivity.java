@@ -64,8 +64,7 @@ public class MainActivity extends AppCompatActivity implements
      * it is unique and consistent.
      */
     private static final int ID_FORECAST_LOADER = 44;
-    //  TODO (35) Remove the preference change flag
-    private static boolean PREFERENCES_HAVE_BEEN_UPDATED = false;
+    //  COMP (35) Remove the preference change flag
     private final String TAG = MainActivity.class.getSimpleName();
     //  COMP (16) Create a String array containing the names of the desired data columns from our ContentProvider
     public String[] dataColumns = new String[]{
@@ -74,8 +73,7 @@ public class MainActivity extends AppCompatActivity implements
             COLUMN_MIN_TEMP,
             COLUMN_MAX_TEMP
     };
-    //  TODO (37) Remove the error TextView
-    private TextView mErrorMessageDisplay;
+    //  COMP (37) Remove the error TextView
     private ForecastAdapter mForecastAdapter;
     private RecyclerView mRecyclerView;
     private int mPosition = RecyclerView.NO_POSITION;
@@ -96,9 +94,8 @@ public class MainActivity extends AppCompatActivity implements
          */
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_forecast);
 
-//      TODO (36) Remove the findViewById call for the error TextView
+//      COMP (36) Remove the findViewById call for the error TextView
         /* This TextView is used to display errors and will be hidden if there are no errors */
-        mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message_display);
 
         /*
          * The ProgressBar that will indicate to the user that we are loading data. It will be
