@@ -33,6 +33,8 @@ import com.example.android.sunshine.data.WeatherContract;
 import com.example.android.sunshine.utilities.SunshineDateUtils;
 import com.example.android.sunshine.utilities.SunshineWeatherUtils;
 
+import org.w3c.dom.Text;
+
 public class DetailActivity extends AppCompatActivity {
 //      TODO (21) Implement LoaderManager.LoaderCallbacks<Cursor>
 
@@ -51,18 +53,30 @@ public class DetailActivity extends AppCompatActivity {
 
 //  TODO (15) Declare a private Uri field called mUri
 
-//  TODO (10) Remove the mWeatherDisplay TextView declaration
-    private TextView mWeatherDisplay;
+//  COMP (10) Remove the mWeatherDisplay TextView declaration
 
-//  TODO (11) Declare TextViews for the date, description, high, low, humidity, wind, and pressure
+//  COMP (11) Declare TextViews for the date, description, high, low, humidity, wind, and pressure
+    private TextView mWeatherDate;
+    private TextView mWeatherDescription;
+    private TextView mWeatherHighTemp;
+    private TextView mWeatherLowTemp;
+    private TextView mWeatherHumidity;
+    private TextView mWeatherWind;
+    private TextView mWeatherPressure;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-//      TODO (12) Remove mWeatherDisplay TextView
-        mWeatherDisplay = (TextView) findViewById(R.id.tv_display_weather);
-//      TODO (13) Find each of the TextViews by ID
+//      COMP (12) Remove mWeatherDisplay TextView
+//      COMP (13) Find each of the TextViews by ID
+        mWeatherDate = (TextView) findViewById(R.id.tv_detail_date);
+        mWeatherDescription = (TextView) findViewById(R.id.tv_detail_description);
+        mWeatherHighTemp = (TextView) findViewById(R.id.tv_detail_high_temp);
+        mWeatherLowTemp = (TextView) findViewById(R.id.tv_detail_low_temp);
+        mWeatherHumidity = (TextView) findViewById(R.id.tv_detail_humidity);
+        mWeatherWind = (TextView) findViewById(R.id.tv_detail_wind);
+        mWeatherPressure = (TextView) findViewById(R.id.tv_detail_pressure);
 
 //      TODO (14) Remove the code that checks for extra text
         Intent intentThatStartedThisActivity = getIntent();
