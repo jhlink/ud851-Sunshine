@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,9 +51,9 @@ import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.*;
 public class MainActivity extends AppCompatActivity implements
 //      COMP (15) Remove the implements declaration for SharedPreferences change listener and
 // methods
-//      TODO (20) Implement LoaderCallbacks<Cursor> instead of String[]
+//      COMP (20) Implement LoaderCallbacks<Cursor> instead of String[]
         ForecastAdapter.ForecastAdapterOnClickHandler,
-        LoaderManager.LoaderCallbacks<String[]> {
+        LoaderManager.LoaderCallbacks<Cursor> {
 
     /*
      * This ID will be used to identify the Loader responsible for loading our weather forecast. In
@@ -199,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-//  TODO (21) Refactor onCreateLoader to return a Loader<Cursor>, not Loader<String[]>
+//  COMP (21) Refactor onCreateLoader to return a Loader<Cursor>, not Loader<String[]>
 
     /**
      * Instantiate and return a new Loader for the given ID.
@@ -209,66 +210,13 @@ public class MainActivity extends AppCompatActivity implements
      * @return Return a new Loader instance that is ready to start loading.
      */
     @Override
-    public Loader<String[]> onCreateLoader(int id, final Bundle loaderArgs) {
+    public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs) {
 
-//      TODO (23) Remove the onStartLoading method declaration
-//      TODO (24) Remove the loadInBackground method declaration
-//      TODO (25) Remove the deliverResult method declaration
-//          TODO (22) If the loader requested is our forecast loader, return the appropriate CursorLoader
-        return new AsyncTaskLoader<String[]>(this) {
-
-            /* This String array will hold and help cache our weather data */
-            String[] mWeatherData = null;
-
-            /**
-             * Subclasses of AsyncTaskLoader must implement this to take care of loading their data.
-             */
-            @Override
-            protected void onStartLoading() {
-                if (mWeatherData != null) {
-                    deliverResult(mWeatherData);
-                } else {
-                    mLoadingIndicator.setVisibility(View.VISIBLE);
-                    forceLoad();
-                }
-            }
-
-            /**
-             * This is the method of the AsyncTaskLoader that will load and parse the JSON data
-             * from OpenWeatherMap in the background.
-             *
-             * @return Weather data from OpenWeatherMap as an array of Strings.
-             *         null if an error occurs
-             */
-            @Override
-            public String[] loadInBackground() {
-
-                URL weatherRequestUrl = NetworkUtils.getUrl(MainActivity.this);
-
-                try {
-                    String jsonWeatherResponse = NetworkUtils
-                            .getResponseFromHttpUrl(weatherRequestUrl);
-
-                    String[] simpleJsonWeatherData = OpenWeatherJsonUtils
-                            .getSimpleWeatherStringsFromJson(MainActivity.this, jsonWeatherResponse);
-
-                    return simpleJsonWeatherData;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-
-            /**
-             * Sends the result of the load to the registered listener.
-             *
-             * @param data The result of the load
-             */
-            public void deliverResult(String[] data) {
-                mWeatherData = data;
-                super.deliverResult(data);
-            }
-        };
+//      COMP (23) Remove the onStartLoading method declaration
+//      COMP (24) Remove the loadInBackground method declaration
+//      COMP (25) Remove the deliverResult method declaration
+//          COMP (22) If the loader requested is our forecast loader, return the appropriate CursorLoader
+        return new CursorLoader(this);
     }
 
 //  TODO (26) Change onLoadFinished parameter to a Loader<Cursor> instead of a Loader<String[]>
@@ -283,7 +231,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onLoadFinished(Loader<String[]> loader, String[] data) {
         //      TODO (27) Remove the previous body of onLoadFinished
         //      TODO (28) Call mForecastAdapter's swapCursor method and pass in the new Cursor
-        //      TODO (29) If mPosition equals RecyclerView.NO_POSITION, set it to 0
+
         //      TODO (30) Smooth scroll the RecyclerView to mPosition
         //      TODO (31) If the Cursor's size is not equal to 0, call showWeatherDataView
         mLoadingIndicator.setVisibility(View.INVISIBLE);
