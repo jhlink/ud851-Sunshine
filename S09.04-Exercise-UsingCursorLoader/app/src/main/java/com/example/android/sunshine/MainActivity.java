@@ -241,10 +241,13 @@ public class MainActivity extends AppCompatActivity implements
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         //      COMP (27) Remove the previous body of onLoadFinished
         //      COMP (28) Call mForecastAdapter's swapCursor method and pass in the new Cursor
-
+        //      COMP (29) If mPosition equals RecyclerView.NO_POSITION, set it to 0
         //      COMP (30) Smooth scroll the RecyclerView to mPosition
         //      COMP (31) If the Cursor's size is not equal to 0, call showWeatherDataView
         mForecastAdapter.swapCursor(data);
+        if (mPosition == RecyclerView.NO_POSITION) {
+            mPosition = 0;
+        }
         mRecyclerView.smoothScrollToPosition(mPosition);
         if (data.getCount() != 0) {
             showWeatherDataView();
