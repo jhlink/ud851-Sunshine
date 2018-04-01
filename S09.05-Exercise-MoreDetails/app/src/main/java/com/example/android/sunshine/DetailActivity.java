@@ -275,7 +275,7 @@ public class DetailActivity extends AppCompatActivity
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null) {
-
+            displayDataInTextViews();
         }
     }
 
