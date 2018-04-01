@@ -323,6 +323,9 @@ public class WeatherProvider extends ContentProvider {
                         pSelection,
                         selectionArgs);
                 break;
+
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
         if (result != 0) {
