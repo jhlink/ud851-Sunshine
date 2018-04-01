@@ -240,8 +240,9 @@ public class MainActivity extends AppCompatActivity implements
      * @param loader The Loader that is being reset.
      */
     @Override
-    public void onLoaderReset(Loader<String[]> loader) {
-//      TODO (32) Call mForecastAdapter's swapCursor method and pass in null
+    public void onLoaderReset(Loader<Cursor> loader) {
+//      COMP (32) Call mForecastAdapter's swapCursor method and pass in null
+        mForecastAdapter.swapCursor(null);
         /*
          * Since this Loader's data is now invalid, we need to clear the Adapter that is
          * displaying the data.
