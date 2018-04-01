@@ -23,17 +23,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.android.sunshine.utilities.SunshineWeatherUtils;
+
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_DATE;
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_MAX_TEMP;
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_MIN_TEMP;
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_WEATHER_ID;
+
 /**
  * {@link ForecastAdapter} exposes a list of weather forecasts
  * from a {@link android.database.Cursor} to a {@link android.support.v7.widget.RecyclerView}.
  */
 class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapterViewHolder> {
 
-    //  TODO (14) Remove the mWeatherData declaration and the setWeatherData method
-    private String[] mWeatherData;
     //  COMP (1) Declare a private final Context field called mContext
     private final Context mContext;
-
     /*
      * Below, we've defined an interface to handle clicks on items within this Adapter. In the
      * constructor of our ForecastAdapter, we receive an instance of a class that has implemented
@@ -41,18 +45,11 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
      * an item is clicked in the list.
      */
     final private ForecastAdapterOnClickHandler mClickHandler;
+    //  TODO (14) Remove the mWeatherData declaration and the setWeatherData method
+    private String[] mWeatherData;
+    //  COMP (2) Declare a private Cursor field called mCursor
+    private Cursor mCursor = null;
 
-    /**
-     * The interface that receives onClick messages.
-     */
-    public interface ForecastAdapterOnClickHandler {
-        void onClick(String weatherForDay);
-    }
-
-//  COMP (2) Declare a private Cursor field called mCursor
-    private Cursor cursor = null;
-
-//  COMP (3) Add a Context field to the constructor and store that context in mContext
     /**
      * Creates a ForecastAdapter.
      *
@@ -63,6 +60,8 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
         mClickHandler = clickHandler;
         mContext = context;
     }
+
+//  COMP (3) Add a Context field to the constructor and store that context in mContext
 
     /**
      * This gets called when each new ViewHolder is created. This happens when the RecyclerView
@@ -97,12 +96,30 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
      */
     @Override
     public void onBindViewHolder(ForecastAdapterViewHolder forecastAdapterViewHolder, int position) {
-//      TODO (5) Delete the current body of onBindViewHolder
-//      TODO (6) Move the cursor to the appropriate position
-//      TODO (7) Generate a weather summary with the date, description, high and low
-        String weatherForThisDay = mWeatherData[position];
+//      COMP (5) Delete the current body of onBindViewHolder
+//      COMP (6) Move the cursor to the appropriate position
+        if (mCursor != null) {
+            mCursor.moveToPosition(position);
+
+//      COMP (7) Generate a weather summary with the date, description, high and low
+
+            int weatherDateColIndex = mCursor.getColumnIndex(COLUMN_DATE);
+            String weatherDate = mCursor.getString(weatherDateColIndex);
+
+            int weatherDescColIndex = mCursor.getColumnIndex(COLUMN_WEATHER_ID);
+            int weatherId = mCursor.getInt(weatherDescColIndex);
+            String weatherDesc = SunshineWeatherUtils.getStringForWeatherCondition(mContext, weatherId);
+
+            int weatherHighColIndex = mCursor.getColumnIndex(COLUMN_MAX_TEMP);
+            float weatherHighTemp = mCursor.getFloat(weatherHighColIndex);
+
+            int weatherLowColIndex = mCursor.getColumnIndex(COLUMN_MIN_TEMP);
+            float weatherLowTemp = mCursor.getFloat(weatherLowColIndex);
+
 //      TODO (8) Display the summary that you created above
-        forecastAdapterViewHolder.weatherSummary.setText(weatherForThisDay);
+
+            forecastAdapterViewHolder.weatherSummary.setText(weatherForThisDay);
+        }
     }
 
     /**
@@ -129,6 +146,13 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
     public void setWeatherData(String[] weatherData) {
         mWeatherData = weatherData;
         notifyDataSetChanged();
+    }
+
+    /**
+     * The interface that receives onClick messages.
+     */
+    public interface ForecastAdapterOnClickHandler {
+        void onClick(String weatherForDay);
     }
 
 //  TODO (11) Create a new method that allows you to swap Cursors.
