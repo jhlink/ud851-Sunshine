@@ -51,7 +51,7 @@ public class WeatherProvider extends ContentProvider {
     WeatherDbHelper mOpenHelper;
 
 //  COMP (6) Write a method called buildUriMatcher where you match URI's to their numeric ID
-    private static UriMatcher buildUriMatcher() {
+    public static UriMatcher buildUriMatcher() {
 
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
