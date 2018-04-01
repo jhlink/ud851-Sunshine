@@ -226,11 +226,11 @@ public class DetailActivity extends AppCompatActivity
             mWeatherDescription.setText(weatherDescription);
 
             double sHighTempValue = data.getDouble(INDEX_WEATHER_MAX_TEMP);
-            String sHighTempInCels = Double.toString(sHighTempValue);
+            String sHighTempInCels = SunshineWeatherUtils.formatTemperature(this, sHighTempValue);
             mWeatherHighTemp.setText(sHighTempInCels);
 
             double sLowTempValue = data.getDouble(INDEX_WEATHER_MIN_TEMP);
-            String sLowTempInCels = Double.toString(sLowTempValue);
+            String sLowTempInCels = SunshineWeatherUtils.formatTemperature(this, sLowTempValue);
             mWeatherLowTemp.setText(sLowTempInCels);
 
             String formattedTemps = SunshineWeatherUtils.formatHighLows(
