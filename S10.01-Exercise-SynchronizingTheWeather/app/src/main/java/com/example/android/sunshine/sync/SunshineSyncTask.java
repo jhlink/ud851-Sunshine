@@ -1,3 +1,5 @@
+package com.example.android.sunshine.sync;
+
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
