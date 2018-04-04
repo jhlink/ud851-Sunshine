@@ -106,6 +106,7 @@ public class NotificationUtils {
 
 //          COMP (3) Create an Intent with the proper URI to start the DetailActivity
             Intent startDetailActivityIntent = new Intent(context, DetailActivity.class);
+            startDetailActivityIntent.setData(todaysWeatherUri);
 
 //          COMP (4) Use TaskStackBuilder to create the proper PendingIntent
             TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(context);
