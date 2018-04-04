@@ -45,10 +45,13 @@ public class SunshineSyncUtils {
             protected Void doInBackground(Void... voids) {
                 Uri weatherUri = WeatherContract.WeatherEntry.CONTENT_URI;
 
+                String[] projectionColumns = new String[]{ WeatherContract.WeatherEntry._ID };
+                String selection = WeatherContract.WeatherEntry.getSqlSelectForTodayOnwards();
+
                 Cursor cursor = context.getContentResolver().query(
                         weatherUri,
-                        null,
-                        null,
+                        projectionColumns,
+                        selection,
                         null,
                         null
                 );
@@ -57,7 +60,6 @@ public class SunshineSyncUtils {
                     //  COMP (6) If it is empty or we have a null Cursor, sync the weather now!
                     startImmediateSync(context);
                 }
-
                 return null;
             }
         };
