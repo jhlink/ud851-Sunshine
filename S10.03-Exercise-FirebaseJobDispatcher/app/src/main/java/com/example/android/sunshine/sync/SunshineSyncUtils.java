@@ -48,7 +48,7 @@ public class SunshineSyncUtils {
     private final static String SYNC_TAG = "sunshine-sync";
 
 //  COMP (12) Create a method to schedule our periodic weather sync
-    private synchronized static void schedulePeriodicWeatherSync(@NonNull final Context context) {
+    private static void schedulePeriodicWeatherSync(@NonNull final Context context) {
 
         Driver driver = new GooglePlayDriver(context);
         FirebaseJobDispatcher firebaseJobDispatcher = new FirebaseJobDispatcher(driver);
