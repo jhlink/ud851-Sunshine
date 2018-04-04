@@ -37,9 +37,11 @@
 
     <!-- COMP (11) Add a checkbox preference for enabling and disabling notifications -->
     <!-- COMP (12) Set the default of whether or not to show preferences using bools.xml -->
-    <CheckBoxPreference>
-        <Preference android:shouldDisableView="@bool/show_notif_by_default">Enable Notification
-        </Preference>
-    </CheckBoxPreference>
+    <CheckBoxPreference
+        android:defaultValue="@bool/show_notif_by_default"
+        android:key="@string/pref_enable_notifications_key"
+        android:summaryOff="@string/pref_enable_notifications_false"
+        android:summaryOn="@string/pref_enable_notifications_true"
+        android:title="@string/pref_enable_notifications_label" />
 
 </PreferenceScreen>
