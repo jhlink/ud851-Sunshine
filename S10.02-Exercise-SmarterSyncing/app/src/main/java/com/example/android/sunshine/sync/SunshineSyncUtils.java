@@ -60,10 +60,10 @@ public class SunshineSyncUtils {
                     //  COMP (6) If it is empty or we have a null Cursor, sync the weather now!
                     startImmediateSync(context);
                 }
+                cursor.close();
                 return null;
             }
         };
-
     }
 
 
