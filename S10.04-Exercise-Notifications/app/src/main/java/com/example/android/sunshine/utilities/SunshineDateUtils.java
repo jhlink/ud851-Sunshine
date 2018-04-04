@@ -109,6 +109,16 @@ public final class SunshineDateUtils {
         return TimeUnit.MILLISECONDS.toDays(utcDate);
     }
 
+
+    public static boolean dayHasElapsedSinceLastNotification(long timeInMillis) {
+        long elapsedDays = elapsedDaysSinceEpoch(timeInMillis);
+        if (elapsedDays > 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Normalizes a date (in milliseconds).
      *
