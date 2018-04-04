@@ -25,6 +25,7 @@ import android.support.v7.widget.SnapHelper;
 import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.data.WeatherContract;
 import com.example.android.sunshine.utilities.NetworkUtils;
+import com.example.android.sunshine.utilities.NotificationUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 import com.example.android.sunshine.utilities.SunshineDateUtils;
 
@@ -89,7 +90,7 @@ public class SunshineSyncTask {
 //              COMP (15) If more than a day have passed and notifications are enabled, notify the
 //                  user
                 if (areNotifsEnabled && hasDayPasssed) {
-                    context.getContentResolver().notify();
+                    NotificationUtils.notifyUserOfNewWeather(context);
                 }
 
             /* If the code reaches this point, we have successfully performed our sync */
