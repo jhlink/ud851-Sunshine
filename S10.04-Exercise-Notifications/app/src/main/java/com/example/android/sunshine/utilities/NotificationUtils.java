@@ -99,7 +99,8 @@ public class NotificationUtils {
                     .setLargeIcon(largeIcon)
                     .setContentTitle(notificationTitle)
                     .setContentText(notificationText)
-                    .setSmallIcon(smallArtResourceId);
+                    .setSmallIcon(smallArtResourceId)
+                    .setAutoCancel(true);
 
             Notification notification = builder.build();
 
