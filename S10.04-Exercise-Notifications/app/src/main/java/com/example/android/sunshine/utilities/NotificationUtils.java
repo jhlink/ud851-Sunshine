@@ -113,7 +113,7 @@ public class NotificationUtils {
             taskStackBuilder.addNextIntentWithParentStack(startDetailActivityIntent);
 
             PendingIntent resultingIntent = taskStackBuilder.getPendingIntent(
-                    WEATHER_NOTIF_ID,
+                    0,
                     PendingIntent.FLAG_UPDATE_CURRENT
             );
 
