@@ -19,6 +19,8 @@ import com.example.android.sunshine.R;
 import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.data.WeatherContract;
 
+import java.sql.Time;
+
 public class NotificationUtils {
 
     /*
@@ -125,7 +127,7 @@ public class NotificationUtils {
             notificationManager.notify(WEATHER_NOTIF_ID, notification);
 
 //          COMP (8) Save the time at which the notification occurred using SunshinePreferences
-            SunshinePreferences.saveLastNotificationTime(context, 10);
+            SunshinePreferences.saveLastNotificationTime(context, System.currentTimeMillis());
         }
 
         /* Always close your cursor when you're done with it to avoid wasting resources. */
