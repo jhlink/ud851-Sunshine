@@ -37,9 +37,9 @@ public final class SunshinePreferences {
      * <p>
      * When the location details are updated, the database should to be cleared.
      *
-     * @param context  Context used to get the SharedPreferences
-     * @param lat      the latitude of the city
-     * @param lon      the longitude of the city
+     * @param context Context used to get the SharedPreferences
+     * @param lat     the latitude of the city
+     * @param lon     the longitude of the city
      */
     public static void setLocationDetails(Context context, double lat, double lon) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
@@ -127,7 +127,7 @@ public final class SunshinePreferences {
          * into the double itself.
          */
         preferredCoordinates[0] = Double
-                 .longBitsToDouble(sp.getLong(PREF_COORD_LAT, Double.doubleToRawLongBits(0.0)));
+                .longBitsToDouble(sp.getLong(PREF_COORD_LAT, Double.doubleToRawLongBits(0.0)));
         preferredCoordinates[1] = Double
                 .longBitsToDouble(sp.getLong(PREF_COORD_LONG, Double.doubleToRawLongBits(0.0)));
 
@@ -183,6 +183,21 @@ public final class SunshinePreferences {
         return lastNotificationTime;
     }
 
+    public static boolean areNotificationsEnabled(Context context) {
+        String displayNotificationKey = context.getString(R.string
+                .pref_enable_notifications_key);
+        boolean defaultNotificationSetting = context
+                .getResources()
+                .getBoolean(R.bool.show_notif_by_default);
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+
+        boolean notificationsEnabled = sp.getBoolean(displayNotificationKey,
+                defaultNotificationSetting);
+
+        return notificationsEnabled;
+    }
+
     /**
      * Returns the elapsed time in milliseconds since the last notification was shown. This is used
      * as part of our check to see if we should show another notification when the weather is
@@ -202,7 +217,7 @@ public final class SunshinePreferences {
      * Saves the time that a notification is shown. This will be used to get the ellapsed time
      * since a notification was shown.
      *
-     * @param context Used to access SharedPreferences
+     * @param context            Used to access SharedPreferences
      * @param timeOfNotification Time of last notification to save (in UNIX time)
      */
     public static void saveLastNotificationTime(Context context, long timeOfNotification) {
