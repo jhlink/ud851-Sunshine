@@ -28,7 +28,8 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:25.4.0'
     implementation 'com.android.support:preference-v7:25.4.0'
 
-    // TODO (1) Add the FirebaseJobDispatcher dependency to the project
+    // COMP (1) Add the FirebaseJobDispatcher dependency to the project
+    implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 
     // Instrumentation dependencies use androidTestCompile
     // (as opposed to testCompile for local unit tests run in the JVM)
