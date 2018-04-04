@@ -33,6 +33,8 @@ import com.firebase.jobdispatcher.Trigger;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.firebase.jobdispatcher.Lifetime.FOREVER;
+
 public class SunshineSyncUtils {
 
 //  COMP (10) Add constant values to sync Sunshine every 3 - 4 hours
@@ -61,6 +63,7 @@ public class SunshineSyncUtils {
                         REMINDER_INTERVAL_SECONDS + FLEX_TIME_INTERVAL_SECONDS))
                 .setRecurring(true)
                 .setConstraints(Constraint.ON_UNMETERED_NETWORK)
+                .setLifetime(FOREVER)
                 .setReplaceCurrent(true)
                 .build();
 
