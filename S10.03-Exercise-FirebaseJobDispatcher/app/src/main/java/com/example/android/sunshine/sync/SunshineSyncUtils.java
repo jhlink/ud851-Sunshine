@@ -39,7 +39,7 @@ public class SunshineSyncUtils {
     private final static int REMINDER_INTERVAL_HOURS = 3;
     private final static int REMINDER_INTERVAL_SECONDS = (int) (TimeUnit.HOURS.toSeconds
             (REMINDER_INTERVAL_HOURS));
-    private final static int FLEX_TIME_INTERVAL_SECONDS = (REMINDER_INTERVAL_SECONDS / 4);
+    private final static int FLEX_TIME_INTERVAL_SECONDS = (REMINDER_INTERVAL_SECONDS / 3);
 
 
     private static boolean sInitialized;
