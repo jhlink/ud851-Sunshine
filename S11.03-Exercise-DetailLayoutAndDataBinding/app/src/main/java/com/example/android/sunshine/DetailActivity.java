@@ -247,7 +247,7 @@ public class DetailActivity extends AppCompatActivity implements
         }
 
 //      COMP (7) Display the weather icon using mDetailBinding
-        mDetailBinding.weatherIcon.setVisibility(View.VISIBLE);
+        mDetailBinding.primaryWeatherInfo.weatherIcon.setVisibility(View.VISIBLE);
 
         /****************
          * Weather Date *
@@ -265,7 +265,7 @@ public class DetailActivity extends AppCompatActivity implements
         String dateText = SunshineDateUtils.getFriendlyDateString(this, localDateMidnightGmt, true);
 
 //      COMP (8) Use mDetailBinding to display the date
-        mDetailBinding.date.setText(dateText);
+        mDetailBinding.primaryWeatherInfo.date.setText(dateText);
 
         /***********************
          * Weather Description *
@@ -280,11 +280,11 @@ public class DetailActivity extends AppCompatActivity implements
 
 //      COMP (9) Use mDetailBinding to display the description and set the content description
         /* Set the text to display the description*/
-        mDetailBinding.weatherDescription.setText(description);
+        mDetailBinding.primaryWeatherInfo.weatherDescription.setText(description);
 
 //      COMP (16) Set the content description of the icon to the same as the weather description
 // a11y text
-        mDetailBinding.weatherDescription.setContentDescription(weatherDescriptionA11y);
+        mDetailBinding.primaryWeatherInfo.weatherDescription.setContentDescription(weatherDescriptionA11y);
 
         /**************************
          * High (max) temperature *
@@ -303,8 +303,8 @@ public class DetailActivity extends AppCompatActivity implements
 
 //      COMP (10) Use mDetailBinding to display the high temperature and set the content description
         /* Set the text to display the high temperature */
-        mDetailBinding.highTemperature.setText(highString);
-        mDetailBinding.highTemperature.setContentDescription(highTempA11y);
+        mDetailBinding.primaryWeatherInfo.highTemperature.setText(highString);
+        mDetailBinding.primaryWeatherInfo.highTemperature.setContentDescription(highTempA11y);
 
         /*************************
          * Low (min) temperature *
@@ -323,8 +323,10 @@ public class DetailActivity extends AppCompatActivity implements
 
 //      COMP (11) Use mDetailBinding to display the low temperature and set the content description
         /* Set the text to display the low temperature */
-        mDetailBinding.lowTemperature.setText(lowString);
-        mDetailBinding.lowTemperature.setContentDescription(lowTempA11y);
+
+        mDetailBinding.primaryWeatherInfo.lowTemperature.setText(lowString);
+        mDetailBinding.primaryWeatherInfo.lowTemperature.setContentDescription(lowTempA11y);
+
 
         /************
          * Humidity *
@@ -338,10 +340,10 @@ public class DetailActivity extends AppCompatActivity implements
 
 //      COMP (12) Use mDetailBinding to display the humidity and set the content description
         /* Set the text to display the humidity */
-        mDetailBinding.humidity.setText(humidityString);
+        mDetailBinding.extraWeatherDetails.humidity.setText(humidityString);
 
 //      COMP (19) Set the content description of the humidity label to the humidity a11y String
-        mDetailBinding.humidity.setContentDescription(humidityA11y);
+        mDetailBinding.extraWeatherDetails.humidity.setContentDescription(humidityA11y);
 
 
         /****************************
@@ -357,8 +359,8 @@ public class DetailActivity extends AppCompatActivity implements
 
 //      COMP (13) Use mDetailBinding to display the wind and set the content description
         /* Set the text to display wind information */
-        mDetailBinding.wind.setText(windString);
-        mDetailBinding.wind.setContentDescription(windA11y);
+        mDetailBinding.extraWeatherDetails.wind.setText(windString);
+        mDetailBinding.extraWeatherDetails.wind.setContentDescription(windA11y);
 
 //      COMP (22) Set the content description of the wind label to the wind a11y String
 
@@ -382,10 +384,10 @@ public class DetailActivity extends AppCompatActivity implements
 
 //      COMP (14) Use mDetailBinding to display the pressure and set the content description
         /* Set the text to display the pressure information */
-        mDetailBinding.pressure.setText(pressureString);
+        mDetailBinding.extraWeatherDetails.pressure.setText(pressureString);
 
 //      COMP (24) Set the content description of the pressure label to the pressure a11y String
-        mDetailBinding.pressure.setContentDescription(pressureA11y);
+        mDetailBinding.extraWeatherDetails.pressure.setContentDescription(pressureA11y);
 
         /* Store the forecast summary String in our forecast summary field to share later */
         mForecastSummary = String.format("%s - %s - %s/%s",

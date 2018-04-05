@@ -26,11 +26,11 @@
   - Note that this is the PORTRAIT version of the layout.                                        -
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-<!-- TODO (31) Delete the old layout completely -->
+<!- COMP (31) Delete the old layout completely -->
 
-<!-- TODO (35) Surround the entire layout with <layout/> tags for data binding -->
+<!-- COMP (35) Surround the entire layout with <layout/> tags for data binding -->
 
-<!-- TODO (34) Create a LinearLayout to contain two included layouts that share equal space -->
+<!-- COMP (34) Create a LinearLayout to contain two included layouts that share equal space -->
 
 <!-- COMP (25) Create a layout called primary_weather_info.xml -->
 <!-- COMP (26) Surround the entire layout with <layout/> tags for data binding -->
@@ -44,8 +44,7 @@
 
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    >
 
 <LinearLayout
     android:layout_width="match_parent"
