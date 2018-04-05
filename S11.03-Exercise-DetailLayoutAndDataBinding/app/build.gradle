@@ -19,7 +19,7 @@ android {
     }
 
 //  COMP (1) Enable databinding
-    dataBinding.enabled = true;
+    dataBinding.enabled = true
 
 }
 
