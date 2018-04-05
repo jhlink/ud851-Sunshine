@@ -27,6 +27,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import android.databinding.DataBindingUtil;
@@ -228,7 +229,7 @@ public class DetailActivity extends AppCompatActivity implements
          * Before we bind the data to the UI that will display that data, we need to check the
          * cursor to make sure we have the results that we are expecting. In order to do that, we
          * check to make sure the cursor is not null and then we call moveToFirst on the cursor.
-         * Although it may not seem obvious at first, moveToFirst will return true if it contains
+         * Although it may not seem obvious at first, moveToFirst will return true if it containsjj/
          * a valid first row of data.
          *
          * If we have valid data, we want to continue on to bind that data to the UI. If we don't
@@ -246,7 +247,7 @@ public class DetailActivity extends AppCompatActivity implements
         }
 
 //      COMP (7) Display the weather icon using mDetailBinding
-        mDetailBinding.weatherIcon.show();
+        mDetailBinding.weatherIcon.setVisibility(View.VISIBLE);
 
         /****************
          * Weather Date *
@@ -377,7 +378,7 @@ public class DetailActivity extends AppCompatActivity implements
         String pressureString = getString(R.string.format_pressure, pressure);
 
 //      COMP (23) Create the content description for the pressure for a11y
-        String pressureA11y = getString(R.string.a11y_pressure, pressureString)
+        String pressureA11y = getString(R.string.a11y_pressure, pressureString);
 
 //      COMP (14) Use mDetailBinding to display the pressure and set the content description
         /* Set the text to display the pressure information */

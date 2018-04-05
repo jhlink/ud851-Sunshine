@@ -25,7 +25,6 @@
   -                                                                                              -
   - Note that this is the PORTRAIT version of the layout.                                        -
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
--->kjjjj
 
 <!-- TODO (31) Delete the old layout completely -->
 
@@ -69,3 +68,4 @@
     </include>
 
 </LinearLayout>
+</layout>
