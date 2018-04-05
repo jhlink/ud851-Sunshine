@@ -3,19 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <!-- Weather icon for today -->
         <ImageView
             android:id="@+id/weatherIcon"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_width="99dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="152dp"
+            android:layout_marginRight="152dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="@+id/date"
+            app:layout_constraintTop_toBottomOf="@+id/date"
             app:srcCompat="@drawable/ic_cloudy" />
 
         <TextView
             android:id="@+id/date"
             style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Saturday, September 24" />
 
         <!-- Text that describes weather condition -->
@@ -24,6 +40,12 @@
             style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/weatherIcon"
+            app:layout_constraintStart_toStartOf="@+id/weatherIcon"
+            app:layout_constraintTop_toBottomOf="@+id/weatherIcon"
             tools:text="Rainy" />
 
         <!-- High temperature for today -->
@@ -32,6 +54,12 @@
             style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="184dp"
+            android:layout_marginStart="184dp"
+            android:layout_marginTop="32dp"
+            android:textSize="48sp"
+            app:layout_constraintStart_toStartOf="@+id/date"
+            app:layout_constraintTop_toBottomOf="@+id/date"
             tools:text="19\u00b0" />
 
         <!-- Low temperature for today -->
@@ -40,6 +68,15 @@
             style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="@+id/high_temperature"
+            app:layout_constraintStart_toStartOf="@+id/high_temperature"
+            app:layout_constraintTop_toBottomOf="@+id/high_temperature"
             tools:text="10\u00b0" />
 
     </android.support.constraint.ConstraintLayout>
