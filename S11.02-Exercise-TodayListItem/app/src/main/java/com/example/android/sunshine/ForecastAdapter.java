@@ -37,8 +37,9 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
 //  COMP (1) Add a layout called list_item_forecast_today
 //  COMP (2) Using ConstraintLayout, implement the today list item layout
 
-//  TODO (4) Create a resources file called bools.xml within the res/values-port directory
-//  TODO (5) Within bools.xml in the portrait specific directory, add a bool called use_today_layout and set it to false
+//  COMP (4) Create a resources file called bools.xml within the res/values-port directory
+//  COMP (5) Within bools.xml in the portrait specific directory, add a bool called use_today_layout
+// and set it to false
 
 //  TODO (6) Declare constant IDs for the ViewType for today and for a future day
 
