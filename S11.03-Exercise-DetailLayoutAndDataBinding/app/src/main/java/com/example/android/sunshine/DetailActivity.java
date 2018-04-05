@@ -244,7 +244,8 @@ public class DetailActivity extends AppCompatActivity implements
             return;
         }
 
-//      TODO (7) Display the weather icon using mDetailBinding
+//      COMP (7) Display the weather icon using mDetailBinding
+        mDetailBinding.weatherIcon.show();
 
         /****************
          * Weather Date *
@@ -261,8 +262,8 @@ public class DetailActivity extends AppCompatActivity implements
         long localDateMidnightGmt = data.getLong(INDEX_WEATHER_DATE);
         String dateText = SunshineDateUtils.getFriendlyDateString(this, localDateMidnightGmt, true);
 
-//      TODO (8) Use mDetailBinding to display the date
-        mDateView.setText(dateText);
+//      COMP (8) Use mDetailBinding to display the date
+        mDetailBinding.weatherDate.setText(dateText);
 
         /***********************
          * Weather Description *
@@ -274,9 +275,9 @@ public class DetailActivity extends AppCompatActivity implements
 
 //      TODO (15) Create the content description for the description for a11y
 
-//      TODO (9) Use mDetailBinding to display the description and set the content description
+//      COMP (9) Use mDetailBinding to display the description and set the content description
         /* Set the text to display the description*/
-        mDescriptionView.setText(description);
+        mDetailBinding.weatherDescription.setText(description);
 
 //      TODO (16) Set the content description of the icon to the same as the weather description a11y text
 
@@ -294,9 +295,9 @@ public class DetailActivity extends AppCompatActivity implements
 
 //      TODO (17) Create the content description for the high temperature for a11y
 
-//      TODO (10) Use mDetailBinding to display the high temperature and set the content description
+//      COMP (10) Use mDetailBinding to display the high temperature and set the content description
         /* Set the text to display the high temperature */
-        mHighTemperatureView.setText(highString);
+        mDetailBinding.highTemperatureView.setText(highString);
 
         /*************************
          * Low (min) temperature *
@@ -310,11 +311,12 @@ public class DetailActivity extends AppCompatActivity implements
          */
         String lowString = SunshineWeatherUtils.formatTemperature(this, lowInCelsius);
 
-//      TODO (18) Create the content description for the low temperature for a11y
+//      COMP (18) Create the content description for the low temperature for a11y
+        String lowTempA11y = getString(R.string.a11y_low_temp);
 
-//      TODO (11) Use mDetailBinding to display the low temperature and set the content description
+//      COMP (11) Use mDetailBinding to display the low temperature and set the content description
         /* Set the text to display the low temperature */
-        mLowTemperatureView.setText(lowString);
+        mDetailBinding.mLowTemperatureView.setText(lowString);
 
         /************
          * Humidity *
