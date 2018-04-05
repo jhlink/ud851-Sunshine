@@ -70,8 +70,9 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
      * is in landscape. This flag will be set in the constructor of the adapter by accessing
      * boolean resources.
      */
-//  TODO (7) Declare a private boolean called mUseTodayLayout
+//  COMP (7) Declare a private boolean called mUseTodayLayout
 
+    private boolean mUseTodayLayout;
     private Cursor mCursor;
 
     /**
