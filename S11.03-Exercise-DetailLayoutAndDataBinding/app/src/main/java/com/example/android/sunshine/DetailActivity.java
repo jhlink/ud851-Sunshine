@@ -31,6 +31,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import android.databinding.DataBindingUtil;
+
+import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.data.WeatherContract;
 import com.example.android.sunshine.databinding.ActivityDetailBinding;
 import com.example.android.sunshine.utilities.SunshineDateUtils;
@@ -109,7 +111,7 @@ public class DetailActivity extends AppCompatActivity implements
 //      COMP (5) Remove all the findViewById calls
 
 //      COMP (6) Instantiate mDetailBinding using DataBindingUtil
-        mDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_forecast);
+        mDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
 
         mUri = getIntent().getData();
         if (mUri == null) throw new NullPointerException("URI for DetailActivity cannot be null");
