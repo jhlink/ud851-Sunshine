@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +14,17 @@
             style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="212dp"
+            tools:layout_editor_absoluteY="60dp"
             tools:text="38%" />
+
+        <TextView
+            android:id="@+id/humidityLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/humidity"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="60dp" />
 
         <!-- Pressure  -->
         <TextView
@@ -20,7 +32,18 @@
             style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/humidity"
+            app:layout_constraintTop_toBottomOf="@+id/humidity"
             tools:text="995 hPa" />
+
+        <TextView
+            android:id="@+id/pressureLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/atmospheric_pressure"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="106dp" />
 
         <!-- Wind  -->
         <TextView
@@ -28,7 +51,18 @@
             style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/humidity"
+            app:layout_constraintTop_toBottomOf="@+id/pressure"
             tools:text="4km/h NW" />
+
+        <TextView
+            android:id="@+id/windLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wind_speed_and_direction"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="154dp" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

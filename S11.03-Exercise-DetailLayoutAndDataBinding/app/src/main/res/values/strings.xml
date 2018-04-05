@@ -244,4 +244,9 @@
         Low:<xliff:g id="low">%3$s</xliff:g>
     </string>
 
+    <!-- Used by Layout within ExtraWeatherDetails XML -->
+    <string name="atmospheric_pressure">Atmospheric Pressure</string>
+    <string name="wind_speed_and_direction">Wind Speed \n\tand Direction</string>
+    <string name="humidity">Humidity</string>
+
 </resources>
