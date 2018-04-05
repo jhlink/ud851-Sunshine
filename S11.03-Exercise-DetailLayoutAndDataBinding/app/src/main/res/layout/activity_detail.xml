@@ -53,15 +53,17 @@
     android:padding="8dp">
 
     <include
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/primary_weather_info"
         layout="@layout/primary_weather_info">
     </include>
 
     <include
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/extra_weather_details"
         layout="@layout/extra_weather_details">
     </include>
