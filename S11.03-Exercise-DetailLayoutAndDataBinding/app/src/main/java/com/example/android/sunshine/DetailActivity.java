@@ -97,7 +97,7 @@ public class DetailActivity extends AppCompatActivity implements
      * programmatically without cluttering up the code with findViewById.
      */
 //  COMP (3) Declare an ActivityDetailBinding field called mDetailBinding
-    DetailActivityBinding mDetailBinding;
+    ActivityDetailBinding mDetailBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
