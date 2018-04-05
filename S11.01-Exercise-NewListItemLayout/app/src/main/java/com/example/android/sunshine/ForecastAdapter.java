@@ -121,6 +121,7 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
          /* Use the weatherId to obtain the proper description */
         int weatherId = mCursor.getInt(MainActivity.INDEX_WEATHER_CONDITION_ID);
         String description = SunshineWeatherUtils.getStringForWeatherCondition(mContext, weatherId);
+        String allyDescription = mContext.getString(R.string.a11y_forecast, description);
 
         int weatherImageId = SunshineWeatherUtils.getSmallArtResourceIdForWeatherCondition(weatherId);
 
@@ -138,6 +139,7 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
         forecastAdapterViewHolder.weatherDate.setText(dateString);
         forecastAdapterViewHolder.weatherTemperature.setText(highAndLowTemperature);
         forecastAdapterViewHolder.weatherDescription.setText(description);
+        forecastAdapterViewHolder.weatherDescription.setContentDescription(allyDescription);
     }
 
     /**
