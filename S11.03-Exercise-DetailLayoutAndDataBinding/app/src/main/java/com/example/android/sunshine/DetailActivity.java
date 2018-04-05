@@ -286,7 +286,14 @@ public class DetailActivity extends AppCompatActivity implements
 
 //      COMP (16) Set the content description of the icon to the same as the weather description
 // a11y text
-        mDetailBinding.primaryWeatherInfo.weatherDescription.setContentDescription(weatherDescriptionA11y);
+        mDetailBinding.primaryWeatherInfo.weatherIcon.setContentDescription(weatherDescriptionA11y);
+
+        /**********************************
+         * Icon Update on Detail Activity *
+         **********************************/
+        int imageResource = SunshineWeatherUtils.getLargeArtResourceIdForWeatherCondition
+                (weatherId);
+        mDetailBinding.primaryWeatherInfo.weatherIcon.setImageResource(imageResource);
 
         /**************************
          * High (max) temperature *
