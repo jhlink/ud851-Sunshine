@@ -17,11 +17,13 @@ package com.example.android.sunshine;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.sunshine.utilities.SunshineDateUtils;
@@ -163,16 +165,22 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
      * OnClickListener, since it has access to the adapter and the views.
      */
     class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-//      TODO (4) Replace the weatherSummary TextView with individual weather detail TextViews
-        final TextView weatherSummary;
+//      COMP (4) Replace the weatherSummary TextView with individual weather detail TextViews
+        final TextView weatherData;
+        final TextView weatherDescription;
+        final TextView weathertTemperature;
 
-//      TODO (5) Add an ImageView for the weather icon
+//      COMP (5) Add an ImageView for the weather icon
+        final ImageView weatherIcon;
 
         ForecastAdapterViewHolder(View view) {
             super(view);
 
-//          TODO (6) Get references to all new views and delete this line
-            weatherSummary = (TextView) view.findViewById(R.id.tv_weather_data);
+//         COMP (6) Get references to all new views and delete this line
+            weatherData = (TextView) view.findViewById(R.id.tv_weather_data);
+            weatherDescription = (TextView) view.findViewById(R.id.tv_weather_data);
+            weathertTemperature = (TextView) view.findViewById(R.id.tv_weather_data);
+            weatherIcon = (ImageView) view.findViewById(R.id.iv_weather_icon);
 
             view.setOnClickListener(this);
         }
