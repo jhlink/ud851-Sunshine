@@ -152,11 +152,13 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
                 .getSmallArtResourceIdForWeatherCondition(weatherId);
 
 
+        int viewTypeID = getItemViewType(position);
+
 //      COMP (15) If the view type of the layout is today, display a large icon
-        if (forecastAdapterViewHolder.getItemViewType() == VIEWTYPE_TODAY_ID) {
+        if (viewTypeID == VIEWTYPE_TODAY_ID) {
             weatherImageId = SunshineWeatherUtils.getLargeArtResourceIdForWeatherCondition
                     (weatherId);
-        } else if (forecastAdapterViewHolder.getItemViewType() == VIEWTYPE_FUTURE_ID) {
+        } else if (viewTypeID == VIEWTYPE_FUTURE_ID) {
 //      COMP (16) If the view type of the layout is future day, display a small icon
             weatherImageId = SunshineWeatherUtils.getSmallArtResourceIdForWeatherCondition
                     (weatherId);
