@@ -109,7 +109,7 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
     public void onBindViewHolder(ForecastAdapterViewHolder forecastAdapterViewHolder, int position) {
         mCursor.moveToPosition(position);
 
-//      TODO (7) Replace the single TextView with Views to display all of the weather info
+//      COMP (7) Replace the single TextView with Views to display all of the weather info
 
         /*******************
          * Weather Summary *
@@ -131,7 +131,9 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
 
         String weatherSummary = dateString + " - " + description + " - " + highAndLowTemperature;
 
-        forecastAdapterViewHolder.weatherSummary.setText(weatherSummary);
+        forecastAdapterViewHolder.weatherDate.setText(dateString);
+        forecastAdapterViewHolder.weatherTemperature.setText(highAndLowTemperature);
+        forecastAdapterViewHolder.weatherDescription.setText(description);
     }
 
     /**
@@ -166,9 +168,9 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
      */
     class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 //      COMP (4) Replace the weatherSummary TextView with individual weather detail TextViews
-        final TextView weatherData;
+        final TextView weatherDate;
         final TextView weatherDescription;
-        final TextView weathertTemperature;
+        final TextView weatherTemperature;
 
 //      COMP (5) Add an ImageView for the weather icon
         final ImageView weatherIcon;
@@ -177,9 +179,9 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
             super(view);
 
 //         COMP (6) Get references to all new views and delete this line
-            weatherData = (TextView) view.findViewById(R.id.tv_weather_data);
-            weatherDescription = (TextView) view.findViewById(R.id.tv_weather_data);
-            weathertTemperature = (TextView) view.findViewById(R.id.tv_weather_data);
+            weatherDate = (TextView) view.findViewById(R.id.tv_weather_date);
+            weatherDescription = (TextView) view.findViewById(R.id.tv_weather_desc);
+            weatherTemperature = (TextView) view.findViewById(R.id.tv_weather_temp);
             weatherIcon = (ImageView) view.findViewById(R.id.iv_weather_icon);
 
             view.setOnClickListener(this);
