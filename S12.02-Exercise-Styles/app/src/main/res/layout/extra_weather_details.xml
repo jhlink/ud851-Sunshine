@@ -50,12 +50,10 @@
             app:layout_constraintVertical_bias="0.33"/>
 
         <!-- Humidity measurement -->
-        <!-- TODO (7) Replace the appropriate attributes with the ExtraWeatherMeasurement style -->
+        <!-- COMP (7) Replace the appropriate attributes with the ExtraWeatherMeasurement style -->
         <TextView
             android:id="@+id/humidity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
+            style="@style/ExtraWeatherMeasurement"
             app:layout_constraintBottom_toBottomOf="@+id/humidity_label"
             app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
             tools:text="38%"/>
@@ -71,12 +69,10 @@
             app:layout_constraintTop_toTopOf="@+id/extra_details"/>
 
         <!-- Pressure measurement -->
-        <!-- TODO (9) Replace the appropriate attributes with the ExtraWeatherMeasurement style -->
+        <!-- COMP (9) Replace the appropriate attributes with the ExtraWeatherMeasurement style -->
         <TextView
             android:id="@+id/pressure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
+            style="@style/ExtraWeatherMeasurement"
             app:layout_constraintBottom_toBottomOf="@+id/pressure_label"
             app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
             tools:text="995 hPa"/>
@@ -93,12 +89,10 @@
             app:layout_constraintVertical_bias="0.65999997"/>
 
         <!-- Wind measurement -->
-        <!-- TODO (11) Replace the appropriate attributes with the ExtraWeatherMeasurement style -->
+        <!-- COMP (11) Replace the appropriate attributes with the ExtraWeatherMeasurement style -->
         <TextView
             android:id="@+id/wind_measurement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
+            style="@style/ExtraWeatherMeasurement"
             app:layout_constraintBottom_toBottomOf="@+id/wind_label"
             app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
             tools:text="4km/h NW"/>
