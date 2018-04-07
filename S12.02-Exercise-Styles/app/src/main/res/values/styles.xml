@@ -33,8 +33,8 @@
 
     <!-- COMP (2) Create a style for MainActivity called AppTheme.Forecast that uses our custom
     ActionBar style -->
-    <style name="AppTheme.Forecast" parent="ActionBar.Solid.Sunshine.NoTitle">
-
+    <style name="AppTheme.Forecast" parent="@style/AppTheme">
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Sunshine.NoTitle</item>
     </style>
 
     <!-- COMP (3) Create the DetailLabel style -->
